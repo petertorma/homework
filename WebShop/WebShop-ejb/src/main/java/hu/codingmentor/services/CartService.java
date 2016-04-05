@@ -1,6 +1,7 @@
 package hu.codingmentor.services;
 
-import hu.codingmentor.MobileDTO;
+
+import hu.codingmentor.dto.MobileDTO;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -11,7 +12,7 @@ import javax.ejb.SessionContext;
 import javax.ejb.Stateful;
 import javax.ejb.StatefulTimeout;
 
-@LocalBean
+
 @Stateful
 @StatefulTimeout(value = 300, unit = TimeUnit.SECONDS)
 public class CartService {

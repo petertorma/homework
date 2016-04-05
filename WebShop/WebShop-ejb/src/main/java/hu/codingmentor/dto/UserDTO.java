@@ -1,4 +1,6 @@
-package hu.codingmentor;
+package hu.codingmentor.dto;
+
+
 
 import hu.codingmentor.annotations.DateAnnotation;
 import java.time.LocalDate;
@@ -34,6 +36,9 @@ public class UserDTO {
     boolean admin = false;
 
     final DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
+    public UserDTO() {
+    }
 
     public UserDTO(String username, String passowrd, String firstName, String lastName, String dateOfBirth, String RegistrationDate) {
         this.username = username;

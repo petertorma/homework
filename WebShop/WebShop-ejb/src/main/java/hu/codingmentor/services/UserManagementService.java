@@ -1,6 +1,7 @@
 package hu.codingmentor.services;
 
-import hu.codingmentor.UserDTO;
+
+import hu.codingmentor.dto.UserDTO;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -15,10 +16,9 @@ import javax.ejb.Startup;
 
 @Singleton
 @Startup
-@LocalBean
 @ConcurrencyManagement(ConcurrencyManagementType.BEAN)
-public enum UserManagementService {
-    INSTANCE;
+public class UserManagementService {
+  
 
     private final Map<String, UserDTO> userList = new HashMap<>();
 

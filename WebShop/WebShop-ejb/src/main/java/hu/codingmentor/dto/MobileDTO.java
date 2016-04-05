@@ -1,4 +1,4 @@
-package hu.codingmentor;
+package hu.codingmentor.dto;
 
 import java.util.UUID;
 import javax.validation.constraints.Max;
@@ -14,6 +14,9 @@ public class MobileDTO {
     @NotNull
     @Min(3)
     private String type;
+
+    public MobileDTO() {
+    }
 
     public MobileDTO(String type, String manufacturer, int price, int piece) {
         this.id = (UUID.randomUUID().toString());

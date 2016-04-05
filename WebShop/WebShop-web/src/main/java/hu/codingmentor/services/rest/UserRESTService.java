@@ -1,6 +1,6 @@
 package hu.codingmentor.services.rest;
 
-import hu.codingmentor.UserDTO;
+import hu.codingmentor.dto.UserDTO;
 import hu.codingmentor.services.UserManagementService;
 import java.io.Serializable;
 import java.util.Collection;
@@ -22,41 +22,41 @@ import javax.ws.rs.core.MediaType;
 @Produces(MediaType.APPLICATION_JSON)
 public class UserRESTService implements Serializable {
 
-    @EJB
+    @Inject
     UserManagementService userService;
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     public UserDTO addUser(UserDTO user) {
-        return UserManagementService.INSTANCE.addUser(user);
+        return userService.addUser(user);
     }
 
     @DELETE
     @Path("/{userName}")
     @Consumes(MediaType.APPLICATION_JSON)
     public UserDTO removeUser(@PathParam("userName") String username) {
-        return UserManagementService.INSTANCE.removeUser(username);
+        return userService.removeUser(username);
     }
 
     @PUT
-    @Path("/{userName")
+    @Path("/{userName}")
     @Consumes(MediaType.APPLICATION_JSON)
     public UserDTO editUser(@PathParam("userName") String username, UserDTO user) {
         if (!user.getUsername().equals(username)) {
             throw new IllegalArgumentException("Username error");
         }
 
-        return UserManagementService.INSTANCE.editUser(user);
+        return userService.editUser(user);
     }
 
     @GET
     public Collection<UserDTO> getUsers() {
-        return UserManagementService.INSTANCE.getUsers();
+        return userService.getUsers();
     }
 
     @GET
     @Path("/{userName}")
     public UserDTO getUserByUsername(@PathParam("userName") String username) {
-        return UserManagementService.INSTANCE.getUser(username);
+        return userService.getUser(username);
     }
 }

@@ -1,12 +1,12 @@
 package hu.codingmentor.services.rest;
 
-import hu.codingmentor.MobileDTO;
-import hu.codingmentor.UserDTO;
+import hu.codingmentor.dto.MobileDTO;
+import hu.codingmentor.dto.UserDTO;
 import hu.codingmentor.services.CartService;
 import hu.codingmentor.services.InventoryService;
 import java.io.Serializable;
-import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
+import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.ws.rs.Consumes;
@@ -21,9 +21,14 @@ import javax.ws.rs.core.MediaType;
 @Produces(MediaType.APPLICATION_JSON)
 public class CartRESTService implements Serializable {
 
-    @EJB
+    public CartRESTService() {
+    }
+
+    @Inject
     private CartService cartService;
 
+    @Inject
+    InventoryService inventory;
     @POST
     @Consumes("application/json")
     public Integer addProduct(@Context HttpServletRequest request, MobileDTO product) {
@@ -34,7 +39,7 @@ public class CartRESTService implements Serializable {
             UserDTO user = (UserDTO) userObject;
 
         }
-        for (MobileDTO availableProduct : InventoryService.INSTANCE.getMobileList()) {
+        for (MobileDTO availableProduct : inventory.getMobileList()) {
             if (availableProduct.getId().equals(product.getId())) {
                 return cartService.addProduct(product);
             }

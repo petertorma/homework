@@ -1,1 +1,8 @@
+hu\codingmentor\dto\UserDTO.class
+hu\codingmentor\services\UserManagementService.class
+hu\codingmentor\annotations\DateAnnotation.class
 hu\codingmentor\NewSessionBean.class
+hu\codingmentor\services\CartService.class
+hu\codingmentor\services\InventoryService.class
+hu\codingmentor\annotations\DateValidator.class
+hu\codingmentor\dto\MobileDTO.class

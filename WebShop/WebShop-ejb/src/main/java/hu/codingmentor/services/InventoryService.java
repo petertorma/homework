@@ -1,6 +1,6 @@
-package hu.codingmentor.services;
 
-import hu.codingmentor.MobileDTO;
+package hu.codingmentor.services;
+import hu.codingmentor.dto.MobileDTO;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.PostConstruct;
@@ -11,11 +11,9 @@ import javax.ejb.Singleton;
 import javax.ejb.Startup;
 
 @Singleton
-@LocalBean
 @Startup
 @ConcurrencyManagement(ConcurrencyManagementType.BEAN)
-public enum InventoryService {
-    INSTANCE;
+public class InventoryService {
 
     List<MobileDTO> mobiles = new ArrayList<>();
 

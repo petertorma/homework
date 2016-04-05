@@ -2,7 +2,7 @@
 
 package hu.codingmentor.annotations;
 
-import hu.codingmentor.UserDTO;
+import hu.codingmentor.dto.UserDTO;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
