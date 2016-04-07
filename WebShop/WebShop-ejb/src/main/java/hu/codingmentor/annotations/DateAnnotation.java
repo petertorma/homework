@@ -7,9 +7,10 @@ import java.lang.annotation.Target;
 import javax.validation.Constraint;
 import javax.validation.Payload;
 
+
 @Constraint(validatedBy = DateValidator.class)
 @Retention(RetentionPolicy.RUNTIME)
-@Target({ElementType.FIELD, ElementType.TYPE})
+@Target({ElementType.TYPE, ElementType.FIELD})
 public @interface DateAnnotation {
 
     String message() default "The registration date can not be earlier then the date of birth";

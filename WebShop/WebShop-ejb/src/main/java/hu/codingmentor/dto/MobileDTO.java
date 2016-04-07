@@ -1,10 +1,12 @@
 package hu.codingmentor.dto;
 
+import hu.codingmentor.annotations.IntValidator;
 import java.util.UUID;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
+@IntValidator
 public class MobileDTO {
 
     @Min(36)
@@ -19,7 +21,7 @@ public class MobileDTO {
     }
 
     public MobileDTO(String type, String manufacturer, int price, int piece) {
-        this.id = (UUID.randomUUID().toString());
+        this.id = UUID.randomUUID().toString(); 
         this.type = type;
         this.manufacturer = manufacturer;
         this.price = price;

@@ -4,7 +4,7 @@ import java.util.Set;
 import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.core.Application;
 
-@ApplicationPath("/")
+@ApplicationPath("webresources")
 public class ApplicationConfig extends Application {
 
     @Override
@@ -16,6 +16,8 @@ public class ApplicationConfig extends Application {
 
     private void addRestResourceClasses(Set<Class<?>> resources) {
         resources.add(hu.codingmentor.services.rest.CartRESTService.class);
+        resources.add(hu.codingmentor.services.rest.InventoryRESTService.class);
+        resources.add(hu.codingmentor.services.rest.LoginResource.class);
         resources.add(hu.codingmentor.services.rest.UserRESTService.class);
     }
 }

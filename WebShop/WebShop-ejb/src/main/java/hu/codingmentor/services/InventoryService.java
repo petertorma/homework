@@ -2,11 +2,11 @@
 package hu.codingmentor.services;
 import hu.codingmentor.dto.MobileDTO;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.ConcurrencyManagement;
 import javax.ejb.ConcurrencyManagementType;
-import javax.ejb.LocalBean;
 import javax.ejb.Singleton;
 import javax.ejb.Startup;
 
@@ -16,7 +16,11 @@ import javax.ejb.Startup;
 public class InventoryService {
 
     List<MobileDTO> mobiles = new ArrayList<>();
-
+  
+    public InventoryService() {
+    }
+    
+    
     @PostConstruct
     public void init() {
         mobiles.add(new MobileDTO("e250", "NOKIA", 10000, 3));

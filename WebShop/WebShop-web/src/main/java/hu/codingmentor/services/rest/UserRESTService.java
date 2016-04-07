@@ -4,7 +4,6 @@ import hu.codingmentor.dto.UserDTO;
 import hu.codingmentor.services.UserManagementService;
 import java.io.Serializable;
 import java.util.Collection;
-import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
@@ -18,8 +17,8 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 @Path("users")
-@Stateless
 @Produces(MediaType.APPLICATION_JSON)
+@Stateless
 public class UserRESTService implements Serializable {
 
     @Inject
@@ -39,9 +38,9 @@ public class UserRESTService implements Serializable {
     }
 
     @PUT
-    @Path("/{userName}")
+    @Path("/{username}")
     @Consumes(MediaType.APPLICATION_JSON)
-    public UserDTO editUser(@PathParam("userName") String username, UserDTO user) {
+    public UserDTO editUser(@PathParam("username") String username, UserDTO user) {
         if (!user.getUsername().equals(username)) {
             throw new IllegalArgumentException("Username error");
         }

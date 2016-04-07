@@ -29,6 +29,7 @@ public class CartRESTService implements Serializable {
 
     @Inject
     InventoryService inventory;
+    
     @POST
     @Consumes("application/json")
     public Integer addProduct(@Context HttpServletRequest request, MobileDTO product) {
@@ -46,4 +47,5 @@ public class CartRESTService implements Serializable {
         }
         return -1;
     }
+    // TODO checkout
 }

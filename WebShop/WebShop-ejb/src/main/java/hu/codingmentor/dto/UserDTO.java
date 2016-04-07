@@ -1,8 +1,7 @@
 package hu.codingmentor.dto;
 
-
-
 import hu.codingmentor.annotations.DateAnnotation;
+import hu.codingmentor.annotations.IntValidator;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -11,6 +10,7 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
+@IntValidator
 public class UserDTO {
 
     @Min(3)
@@ -36,6 +36,7 @@ public class UserDTO {
     boolean admin = false;
 
     final DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+    List<MobileDTO> cart = new ArrayList<>();
 
     public UserDTO() {
     }
@@ -56,7 +57,6 @@ public class UserDTO {
 
     private void setAdmin() {
         admin = "admin".equals(this.getUsername());
-
     }
 
     public List<MobileDTO> getCart() {
@@ -66,8 +66,6 @@ public class UserDTO {
     public void setCart(List<MobileDTO> cart) {
         this.cart = cart;
     }
-
-    List<MobileDTO> cart = new ArrayList<>();
 
     public String getUsername() {
         return username;

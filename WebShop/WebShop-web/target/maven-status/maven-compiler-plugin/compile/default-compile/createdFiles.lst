@@ -1,3 +1,5 @@
-hu\codingmentor\services\rest\CartRESTService.class
+hu\codingmentor\services\rest\LoginResource.class
 hu\codingmentor\config\ApplicationConfig.class
+hu\codingmentor\services\rest\CartRESTService.class
+hu\codingmentor\services\rest\InventoryRESTService.class
 hu\codingmentor\services\rest\UserRESTService.class
