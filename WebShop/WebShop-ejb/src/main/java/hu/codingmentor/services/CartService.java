@@ -1,38 +1,47 @@
 package hu.codingmentor.services;
 
-
 import hu.codingmentor.dto.MobileDTO;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
+import javax.annotation.PreDestroy;
 import javax.annotation.Resource;
-import javax.ejb.LocalBean;
 import javax.ejb.Remove;
 import javax.ejb.SessionContext;
 import javax.ejb.Stateful;
-import javax.ejb.StatefulTimeout;
-
+import javax.enterprise.context.SessionScoped;
+import javax.inject.Inject;
 
 @Stateful
-@StatefulTimeout(value = 300, unit = TimeUnit.SECONDS)
+@SessionScoped
 public class CartService {
 
     public CartService() {
     }
 
+    @Inject
+    InventoryService inventoryService;
+
     @Resource
     SessionContext context;
-    
+
     private final List<MobileDTO> products = new ArrayList<>();
 
-    public Integer addProduct(MobileDTO product) {
+    public List<MobileDTO> addToCart(MobileDTO product) {
         products.add(product);
-        return products.size();
+        return products;
     }
 
-    @Remove
+    public List<MobileDTO> itemsInCart() {
+        return products;
+    }
+
+    
     public void checkout() {
+        for (MobileDTO product : products) {
+           inventoryService.buyMobile(product);
+        }
         products.clear();
     }
-
 }

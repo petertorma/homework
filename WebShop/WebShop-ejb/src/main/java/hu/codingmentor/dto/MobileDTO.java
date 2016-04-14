@@ -1,6 +1,7 @@
 package hu.codingmentor.dto;
 
 import hu.codingmentor.annotations.IntValidator;
+import java.util.Objects;
 import java.util.UUID;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
@@ -76,5 +77,27 @@ public class MobileDTO {
 
     public void setPiece(int piece) {
         this.piece = piece;
+    }
+    
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 23 * hash + Objects.hashCode(this.id);
+        return hash;
+    }
+ 
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final MobileDTO other = (MobileDTO) obj;
+        return Objects.equals(this.id, other.id);
     }
 }

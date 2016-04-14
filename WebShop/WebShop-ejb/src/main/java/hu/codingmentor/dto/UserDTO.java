@@ -6,25 +6,38 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
-import javax.validation.constraints.Min;
+import java.util.Objects;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 @IntValidator
 public class UserDTO {
 
-    @Min(3)
+    public UserDTO(String username, String passowrd) {
+        this.username = username;
+        this.passowrd = passowrd;
+    }
+
+    @Size(min = 3)
     @NotNull
     private String username;
 
     @NotNull
-    @Min(6)
-    @Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*[=+<>.,]|(?=.*[0-9]))(?=\\S+$).{6,}$")
+    @Size(min = 6)
+    @Pattern.List({
+        @Pattern(regexp = ".*[a-z].*"),
+        @Pattern(regexp = ".*[0-9].*"),
+        @Pattern(regexp = ".*[=\\<>+.,].*"),
+        @Pattern(regexp = ".*[A-Z].*")
+
+    }
+    )
     private String passowrd;
     @NotNull
-    private String firstName;
+    private String firstname;
     @NotNull
-    private String lastName;
+    private String lastname;
     @DateAnnotation
     @Pattern(regexp = "YYYY.MM.DD")
     LocalDate dateOfBirth;
@@ -44,8 +57,8 @@ public class UserDTO {
     public UserDTO(String username, String passowrd, String firstName, String lastName, String dateOfBirth, String RegistrationDate) {
         this.username = username;
         this.passowrd = passowrd;
-        this.firstName = firstName;
-        this.lastName = lastName;
+        this.firstname = firstName;
+        this.lastname = lastName;
         this.dateOfBirth = LocalDate.parse(dateOfBirth, dtf);
         this.RegistrationDate = LocalDate.parse(RegistrationDate, dtf);
         this.setAdmin();
@@ -83,20 +96,20 @@ public class UserDTO {
         this.passowrd = passowrd;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public String getFirstname() {
+        return firstname;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
     }
 
-    public String getLastName() {
-        return lastName;
+    public String getLastname() {
+        return lastname;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
     }
 
     public LocalDate getDateOfBirth() {
@@ -115,4 +128,28 @@ public class UserDTO {
         this.RegistrationDate = RegistrationDate;
     }
 
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 43 * hash + Objects.hashCode(this.username);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final UserDTO other = (UserDTO) obj;
+        if (!Objects.equals(this.username, other.username)) {
+            return false;
+        }
+        return true;
+    }
 }
