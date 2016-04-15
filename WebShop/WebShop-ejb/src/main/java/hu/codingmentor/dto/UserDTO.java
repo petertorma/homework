@@ -12,12 +12,8 @@ import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 @IntValidator
+@DateAnnotation
 public class UserDTO {
-
-    public UserDTO(String username, String passowrd) {
-        this.username = username;
-        this.passowrd = passowrd;
-    }
 
     @Size(min = 3)
     @NotNull
@@ -38,12 +34,11 @@ public class UserDTO {
     private String firstname;
     @NotNull
     private String lastname;
-    @DateAnnotation
-    @Pattern(regexp = "YYYY.MM.DD")
+
+    @NotNull
     LocalDate dateOfBirth;
 
     @NotNull
-    @Pattern(regexp = "YYYY.MM.DD")
     LocalDate RegistrationDate;
 
     boolean admin = false;
@@ -54,7 +49,7 @@ public class UserDTO {
     public UserDTO() {
     }
 
-    public UserDTO(String username, String passowrd, String firstName, String lastName, String dateOfBirth, String RegistrationDate) {
+    public UserDTO(String username, String passowrd, String firstName, String lastName, String dateOfBirth, String  RegistrationDate) {
         this.username = username;
         this.passowrd = passowrd;
         this.firstname = firstName;
@@ -62,6 +57,11 @@ public class UserDTO {
         this.dateOfBirth = LocalDate.parse(dateOfBirth, dtf);
         this.RegistrationDate = LocalDate.parse(RegistrationDate, dtf);
         this.setAdmin();
+    }
+
+    public UserDTO(String username, String passowrd) {
+        this.username = username;
+        this.passowrd = passowrd;
     }
 
     public boolean isAdmin() {

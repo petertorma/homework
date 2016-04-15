@@ -15,6 +15,7 @@ public class ApplicationConfig extends Application {
     }
 
     private void addRestResourceClasses(Set<Class<?>> resources) {
+        resources.add(hu.codingmentor.config.Exceptions.BadRequestExceptionMapper.class);
         resources.add(hu.codingmentor.services.rest.CartRESTService.class);
         resources.add(hu.codingmentor.services.rest.InventoryRESTService.class);
         resources.add(hu.codingmentor.services.rest.UserRESTService.class);

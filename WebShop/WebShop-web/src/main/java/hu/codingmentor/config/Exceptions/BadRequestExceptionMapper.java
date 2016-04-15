@@ -1,17 +1,17 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package hu.codingmentor.annotations.exceptions;
 
+package hu.codingmentor.config.Exceptions;
+
+import hu.codingmentor.annotations.exceptions.BadRequestException;
+import hu.codingmentor.annotations.exceptions.ExceptionDTO;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.inject.Inject;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.ExceptionMapper;
+import javax.ws.rs.ext.Provider;
 
+@Provider
 public class BadRequestExceptionMapper implements ExceptionMapper<BadRequestException> {
 
     @Inject

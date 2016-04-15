@@ -1,5 +1,9 @@
-package hu.codingmentor.annotations.exceptions;
+package hu.codingmentor.config.Exceptions;
 
+
+
+import hu.codingmentor.annotations.exceptions.LoggerException;
+import hu.codingmentor.annotations.exceptions.ValidationException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.inject.Inject;

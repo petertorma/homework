@@ -11,6 +11,7 @@ import javax.validation.ValidationException;
 import javax.validation.Validator;
 
 @Interceptor
+
 public class ValidatorInterceptor {
 
         @Inject

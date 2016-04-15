@@ -1,4 +1,6 @@
 C:\Users\vrh\cloneTry\homework\homework\WebShop\WebShop-web\src\main\java\hu\codingmentor\services\rest\CartRESTService.java
 C:\Users\vrh\cloneTry\homework\homework\WebShop\WebShop-web\src\main\java\hu\codingmentor\config\ApplicationConfig.java
 C:\Users\vrh\cloneTry\homework\homework\WebShop\WebShop-web\src\main\java\hu\codingmentor\services\rest\InventoryRESTService.java
+C:\Users\vrh\cloneTry\homework\homework\WebShop\WebShop-web\src\main\java\hu\codingmentor\config\Exceptions\BadRequestExceptionMapper.java
 C:\Users\vrh\cloneTry\homework\homework\WebShop\WebShop-web\src\main\java\hu\codingmentor\services\rest\UserRESTService.java
+C:\Users\vrh\cloneTry\homework\homework\WebShop\WebShop-web\src\main\java\hu\codingmentor\config\Exceptions\ValidationExceptionMapper.java

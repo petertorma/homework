@@ -6,31 +6,23 @@ import java.util.UUID;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @IntValidator
 public class MobileDTO {
 
-    @Min(36)
-    @Max(36)
+    @Size(min = 36, max = 36)
     private String id;
 
     @NotNull
-    @Min(3)
+    @Size(min = 3)
     private String type;
 
     public MobileDTO() {
     }
 
-    public MobileDTO(String type, String manufacturer, int price, int piece) {
-        this.id = UUID.randomUUID().toString(); 
-        this.type = type;
-        this.manufacturer = manufacturer;
-        this.price = price;
-        this.piece = piece;
-    }
-
     @NotNull
-    @Min(3)
+    @Size(min = 3)
     private String manufacturer;
 
     @Min(1)
@@ -38,6 +30,14 @@ public class MobileDTO {
 
     @Min(0)
     private int piece;
+
+    public MobileDTO(String type, String manufacturer, int price, int piece) {
+        this.id = UUID.randomUUID().toString();
+        this.type = type;
+        this.manufacturer = manufacturer;
+        this.price = price;
+        this.piece = piece;
+    }
 
     public String getId() {
         return id;
@@ -78,14 +78,14 @@ public class MobileDTO {
     public void setPiece(int piece) {
         this.piece = piece;
     }
-    
+
     @Override
     public int hashCode() {
         int hash = 7;
         hash = 23 * hash + Objects.hashCode(this.id);
         return hash;
     }
- 
+
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {

@@ -47,10 +47,19 @@ public class CartRESTService implements Serializable {
         Object username = session.getAttribute("user");
         if (userManagementService.getUser(username.toString()) == null) {
             session.invalidate();
-            throw new BadRequestException("There is no user logged in"); // TODO create a runtime exception
+            throw new BadRequestException("There is no user logged in"); 
         } else {
-            return cartService.addToCart(mobile);
+            for (MobileDTO mob : inventoryService.getMobileList()) {
+                if (mob.getId().equals(mobile.getId())) {
+                    return cartService.addToCart(mobile);
+                }
+                else{
+                    throw new BadRequestException("there is no such mobile");
+                }
+            }
+         
         }
+        return cartService.itemsInCart();
     }
 
     @GET
