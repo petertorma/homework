@@ -21,17 +21,21 @@ public class AsyncRestService {
 
     @GET
     @Path("/")
-    public String testAsync(@Context HttpServletRequest request) throws InterruptedException, ExecutionException {
+    public void testAsync(@Context HttpServletRequest request) throws InterruptedException, ExecutionException {
         HttpSession session = request.getSession(true);
         session.setMaxInactiveInterval(400);
-        Future<Long> ret1 = asyncTestService.testMethod();
-        Future<Long> ret2 = asyncTestService.testMethod();
-        ret2.cancel(true);
-
-        Long asynyCancelled = ret2.get();
-        Long asyncGood = ret1.get();
-        return ("The return of the cancelled method: : " + asynyCancelled.toString() + " the return of the other: " + asyncGood.toString());
-
+        System.out.println("i'm gonna call an asyncron method.");
+        try{
+        asyncTestService.asyncronTest();
+        }catch(InterruptedException e){
+            System.out.println("error" +e.getMessage());
+        }
+        System.out.println("i will continue my work during asynron method works in another thread");
+        for (int i = 0; i < 10; i++) {
+            Thread.sleep(50);
+            System.out.println("not asyncron   " +i);
+        }
+        System.out.println("I have finished my work");
     }
 
 }

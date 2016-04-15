@@ -1,32 +1,19 @@
-
 package hu.codingmentor;
 
-import java.util.concurrent.Future;
-import javax.annotation.Resource;
-import javax.ejb.AsyncResult;
 import javax.ejb.Asynchronous;
-import javax.ejb.SessionContext;
 import javax.ejb.Stateless;
 
-@Asynchronous
 @Stateless
 public class AsyncService {
 
-    @Resource
-    private SessionContext context;
+    @Asynchronous
+    public void asyncronTest() throws InterruptedException {
+        System.out.println("asnyron method is being called.");
+        for (int i = 0; i < 10; i++) {
+            Thread.sleep(300);
+            System.out.println("asyncron call  "+ i);
+        }
+        System.out.println("asyncron method is finished running.");
 
-    public Future<Long> testMethod() {
-        Long max = 99999999L;
-        Long start = 0L;
-        for (Long i = 0L; i <= max; i++) {
-            if (i.equals(max)) {
-                start = i;
-            }
-        }
-        if (context.wasCancelCalled()) {
-            return new AsyncResult<>(-1L);
-        } else {
-            return new AsyncResult<>(start);
-        }
     }
 }
