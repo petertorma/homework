@@ -1,6 +1,0 @@
-hu\codingmentor\config\ApplicationConfig.class
-hu\codingmentor\config\Exceptions\ValidationExceptionMapper.class
-hu\codingmentor\services\rest\CartRESTService.class
-hu\codingmentor\services\rest\InventoryRESTService.class
-hu\codingmentor\config\Exceptions\BadRequestExceptionMapper.class
-hu\codingmentor\services\rest\UserRESTService.class

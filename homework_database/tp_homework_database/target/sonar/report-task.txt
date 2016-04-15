@@ -1,0 +1,5 @@
+projectKey=hu.codingmentor:tp_homework_database
+serverUrl=http://sonar.codingmentor.xyz
+dashboardUrl=http://sonar.codingmentor.xyz/dashboard/index/hu.codingmentor:tp_homework_database
+ceTaskId=AVQanqU9NBXGkaqlYXYx
+ceTaskUrl=http://sonar.codingmentor.xyz/api/ce/task?id=AVQanqU9NBXGkaqlYXYx
