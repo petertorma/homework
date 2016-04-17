@@ -15,7 +15,6 @@ import javax.ejb.Startup;
 
 @Singleton
 @Startup
-@ConcurrencyManagement(ConcurrencyManagementType.BEAN)
 public class UserManagementService {
 
     private final Map<String, UserDTO> userList = new HashMap<>();

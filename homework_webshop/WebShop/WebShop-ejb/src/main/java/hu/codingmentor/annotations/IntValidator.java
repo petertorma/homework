@@ -1,4 +1,3 @@
-
 package hu.codingmentor.annotations;
 
 import java.lang.annotation.ElementType;

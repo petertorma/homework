@@ -2,13 +2,7 @@ package hu.codingmentor.services;
 
 import hu.codingmentor.dto.MobileDTO;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
-import javax.annotation.PreDestroy;
-import javax.annotation.Resource;
-import javax.ejb.Remove;
-import javax.ejb.SessionContext;
 import javax.ejb.Stateful;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
@@ -17,14 +11,8 @@ import javax.inject.Inject;
 @SessionScoped
 public class CartService {
 
-    public CartService() {
-    }
-
     @Inject
-    InventoryService inventoryService;
-
-    @Resource
-    SessionContext context;
+    private InventoryService inventoryService;
 
     private final List<MobileDTO> products = new ArrayList<>();
 
@@ -37,11 +25,13 @@ public class CartService {
         return products;
     }
 
-    
+    public CartService() {
+    }
+
     public void checkout() {
-        for (MobileDTO product : products) {
-           inventoryService.buyMobile(product);
-        }
+        products.stream().forEach((product) -> {
+            inventoryService.buyMobile(product);
+        });
         products.clear();
     }
 }

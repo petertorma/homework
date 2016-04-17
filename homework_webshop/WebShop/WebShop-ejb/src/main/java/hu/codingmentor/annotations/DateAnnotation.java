@@ -13,7 +13,7 @@ import javax.validation.Payload;
 @Target({ElementType.TYPE})
 public @interface DateAnnotation {
 
-    String message() default "The registration date can not be earlier then the date of birth";
+    String message() default "{Date.message}";
 
     Class<?>[] groups() default {};
 

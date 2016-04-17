@@ -23,25 +23,26 @@ import javax.ws.rs.core.MediaType;
 public class InventoryRESTService {
 
     @Inject
-    InventoryService inventoryService;
+    private InventoryService inventoryService;
 
     @Inject
-    UserManagementService userManagementService;
+    private UserManagementService userManagementService;
+
+    private static final String USER = "user";
 
     @POST
     @IntValidator
     public MobileDTO addMobile(@Context HttpServletRequest request, MobileDTO mobile) {
         HttpSession session = request.getSession(true);
-        session.setMaxInactiveInterval(1500);
-        Object username = session.getAttribute("user");
+        Object username = session.getAttribute(USER);
         if ((username == null || !(username instanceof String)) || userManagementService.getUser(username.toString()) == null) {
             session.invalidate();
             throw new IllegalRequestException("There is no user logged in");
         } else if (!userManagementService.getUser(username.toString()).isAdmin()) {
             session.invalidate();
-              throw new IllegalRequestException("Only an admin user can add new mobile!");
+            throw new IllegalRequestException("Only an admin user can add new mobile!");
         } else {
-           return inventoryService.addMobile(mobile);
+            return inventoryService.addMobile(mobile);
         }
 
     }

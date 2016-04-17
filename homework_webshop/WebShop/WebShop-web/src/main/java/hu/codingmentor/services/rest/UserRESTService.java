@@ -26,7 +26,9 @@ import javax.ws.rs.core.MediaType;
 public class UserRESTService implements Serializable {
 
     @Inject
-    UserManagementService userService;
+    private UserManagementService userService;
+
+    private static final String USER = "user";
 
     @POST
     @IntValidator
@@ -91,7 +93,7 @@ public class UserRESTService implements Serializable {
                 throw new BadRequestException("there is no such a user:  " + username + " ,with this password" + password);
             } else if (tempUser.getPassowrd().equals(password)) {
                 session.setMaxInactiveInterval(2000);
-                session.setAttribute("user", tempUser.getUsername());
+                session.setAttribute(USER, tempUser.getUsername());
                 return tempUser;
             } else {
                 session.invalidate();

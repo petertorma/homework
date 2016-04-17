@@ -1,6 +1,9 @@
 
 package hu.codingmentor.annotations.exceptions;
 
+import javax.ejb.ApplicationException;
+
+@ApplicationException
 public class IllegalRequestException extends RuntimeException {
     public IllegalRequestException() {
         super();

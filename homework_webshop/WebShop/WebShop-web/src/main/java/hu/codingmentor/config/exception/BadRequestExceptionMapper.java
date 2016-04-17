@@ -2,7 +2,7 @@
 package hu.codingmentor.config.exception;
 
 import hu.codingmentor.annotations.exceptions.IllegalRequestException;
-import hu.codingmentor.annotations.exceptions.ExceptionDTO;
+import hu.codingmentor.dto.ExceptionDTO;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.inject.Inject;

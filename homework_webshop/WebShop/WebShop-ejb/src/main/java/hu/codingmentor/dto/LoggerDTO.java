@@ -1,13 +1,13 @@
-package hu.codingmentor.annotations.exceptions;
+package hu.codingmentor.dto;
 
-public class LoggerException {
+public class LoggerDTO {
 
     private String errorMessage;
 
-    public LoggerException() {
+    public LoggerDTO() {
     }
 
-    public LoggerException(String message) {
+    public LoggerDTO(String message) {
         this.errorMessage = message;
     }
 

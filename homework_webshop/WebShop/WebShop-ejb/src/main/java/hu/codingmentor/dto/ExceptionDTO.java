@@ -1,5 +1,5 @@
 
-package hu.codingmentor.annotations.exceptions;
+package hu.codingmentor.dto;
 
 public class ExceptionDTO {
 

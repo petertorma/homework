@@ -19,7 +19,6 @@ PUT:
 http://localhost:8080/WebShop-web/webresources/users/user
 
  {
-"cart": [0],
 "dateOfBirth": "1993-02-12",
 "firstname": "Rónáldo",
 "lastname": "Kanalas",
@@ -36,14 +35,13 @@ http://localhost:8080/WebShop-web/webresources/users/user
 
 új felhasználó létrehozása: 
 POST:
-http://localhost:8080/WebShop-web/webresources/usersű
+http://localhost:8080/WebShop-web/webresources/users
 
  {
-"cart": [0],
 "dateOfBirth": "1993-02-12",
 "firstname": "USER",
 "lastname": "NEW",
-"passowrd": "123",
+"passowrd": "123Aa=",
 "registrationDate": "2015-02-02",
 "username": "userNew"
  }
@@ -56,13 +54,14 @@ http://localhost:8080/WebShop-web/webresources/mobile
 mobil hozzáadása az inventoryhoz: 
 POST:
 http://localhost:8080/WebShop-web/webresources/mobile/add
-ROSSZ KÍSÉRLET! az id megegyezik egy már létező készülékkel
-{
-"id": "373c6250-dc59-4d59-80ad-4bdffc15b7c9",
-"manufacturer": "test",
-"piece": 30,
-"price": 100000,
-"type": "e2050"
+ROSSZ KÍSÉRLET! a price 0. ami nem lehetséges. validálás közben megszakad. hibaüzenetet kapunk. 
+
+ {
+"id": "2c0c56e5-719e-4337d-87f-604da1903bd2",
+"manufacturer": "APPLE",
+"piece": 1,
+"price": 0,
+"type": "t430"
 }
 
 jó kísérlet!

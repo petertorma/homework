@@ -1,5 +1,3 @@
-
-
 package hu.codingmentor.annotations;
 
 import hu.codingmentor.dto.UserDTO;

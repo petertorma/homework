@@ -1,19 +1,26 @@
 package hu.codingmentor;
 
+import java.util.concurrent.Future;
+import java.util.logging.Logger;
+import javax.ejb.AsyncResult;
 import javax.ejb.Asynchronous;
 import javax.ejb.Stateless;
+import javax.inject.Inject;
 
 @Stateless
 public class AsyncService {
 
+    @Inject
+    private Logger LOGGER;
+
     @Asynchronous
-    public void asyncronTest() throws InterruptedException {
-        System.out.println("asnyron method is being called.");
+    public Future<String> asyncronTest() throws InterruptedException {
+        LOGGER.info("asnyron method is being called.");
         for (int i = 0; i < 10; i++) {
             Thread.sleep(300);
-            System.out.println("asyncron call  "+ i);
+            LOGGER.info("asyncron call  " + i);
         }
-        System.out.println("asyncron method is finished running.");
+        return new AsyncResult<>("Asyncron method finished working");
 
     }
 }

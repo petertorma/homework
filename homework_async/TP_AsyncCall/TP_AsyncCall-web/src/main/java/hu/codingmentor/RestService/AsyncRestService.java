@@ -3,6 +3,7 @@ package hu.codingmentor.RestService;
 import hu.codingmentor.AsyncService;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
+import java.util.logging.Logger;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -19,23 +20,24 @@ public class AsyncRestService {
     @Inject
     private AsyncService asyncTestService;
 
+    @Inject
+    private Logger LOGGER;
+
     @GET
     @Path("/")
     public void testAsync(@Context HttpServletRequest request) throws InterruptedException, ExecutionException {
         HttpSession session = request.getSession(true);
         session.setMaxInactiveInterval(400);
-        System.out.println("i'm gonna call an asyncron method.");
-        try{
-        asyncTestService.asyncronTest();
-        }catch(InterruptedException e){
-            System.out.println("error" +e.getMessage());
-        }
-        System.out.println("i will continue my work during asynron method works in another thread");
+        LOGGER.info("i'm gonna call an asyncron method.");
+        Future<String> res = asyncTestService.asyncronTest();
+        LOGGER.info("i will continue my work during asynron method works in another thread");
         for (int i = 0; i < 10; i++) {
             Thread.sleep(50);
-            System.out.println("not asyncron   " +i);
+            LOGGER.info("not asyncron   " + i);
         }
-        System.out.println("I have finished my work");
+        LOGGER.info("I have finished my work");
+        String result = res.get();
+        LOGGER.info(result);
     }
 
 }

@@ -11,11 +11,12 @@ import javax.validation.ValidationException;
 import javax.validation.Validator;
 
 @Interceptor
-
+@IntValidator
 public class ValidatorInterceptor {
 
         @Inject
         private Validator validator;
+        
 
         @AroundInvoke
         public Object invoke(InvocationContext invocationContext) throws Exception {

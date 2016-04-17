@@ -16,11 +16,10 @@ import javax.ejb.Startup;
 
 @Singleton
 @Startup
-@LocalBean
 @ConcurrencyManagement(ConcurrencyManagementType.BEAN)
 public class InventoryService {
 
-    List<MobileDTO> mobiles = new ArrayList<>();
+    private final List<MobileDTO> mobiles = new ArrayList<>();
 
     public InventoryService() {
     }
@@ -52,14 +51,11 @@ public class InventoryService {
     @Lock(LockType.WRITE)
     public MobileDTO buyMobile(MobileDTO mobile) {
         for (MobileDTO mob : mobiles) {
-            if (mobile.getId().equals(mob.getId())) {
-                if (mob.getPiece() > 0) {
-                    mob.setPiece(mob.getPiece() - 1);
-                    return mob;
-                } else {
-                    throw new IllegalRequestException("there is no more mobile : " + mob.getType() + " : " + mob.getManufacturer());
-                    // todo create an exception!!
-                }
+            if (mobile.getId().equals(mob.getId()) && mob.getPiece() > 0) {
+                mob.setPiece(mob.getPiece() - 1);
+                return mob;
+            } else {
+                throw new IllegalRequestException("there is no more mobile : " + mob.getType() + " : " + mob.getManufacturer());
             }
         }
         throw new IllegalRequestException("there is no such product");

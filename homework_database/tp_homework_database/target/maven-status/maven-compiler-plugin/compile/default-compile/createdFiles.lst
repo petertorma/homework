@@ -1,2 +1,9 @@
-hu\codingmentor\tp_homework_database\Boook.class
-hu\codingmentor\tp_homework_database\Main.class
+hu\codingmentor\tp\homework\database\Main.class
+hu\codingmentor\tp\homework\database\NewsPaper.class
+hu\codingmentor\tp\homework\database\Author.class
+hu\codingmentor\tp\homework\database\Book.class
+hu\codingmentor\tp\homework\database\Item.class
+hu\codingmentor\tp\homework\database\Gender.class
+hu\codingmentor\tp\homework\database\ColorType.class
+hu\codingmentor\tp\homework\database\LengthOfItems.class
+hu\codingmentor\tp\homework\database\Article.class

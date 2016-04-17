@@ -2,7 +2,7 @@ package hu.codingmentor.config.exception;
 
 
 
-import hu.codingmentor.annotations.exceptions.LoggerException;
+import hu.codingmentor.dto.LoggerDTO;
 import hu.codingmentor.annotations.exceptions.ValidationException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -20,8 +20,7 @@ public class ValidationExceptionMapper implements ExceptionMapper<ValidationExce
     public Response toResponse(ValidationException exception) {
 
         logger.log(Level.FINER, "Bean validation exception ", exception);
-        return Response.status(Response.Status.BAD_REQUEST).entity(
-                new LoggerException(exception.getMessage())
+        return Response.status(Response.Status.BAD_REQUEST).entity(new LoggerDTO(exception.getMessage())
         ).type(MediaType.APPLICATION_JSON).build();
 
     }
