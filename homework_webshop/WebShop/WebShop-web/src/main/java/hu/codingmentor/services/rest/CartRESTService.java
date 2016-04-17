@@ -9,7 +9,6 @@ import hu.codingmentor.services.InventoryService;
 import hu.codingmentor.services.UserManagementService;
 import java.io.Serializable;
 import java.util.List;
-import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
