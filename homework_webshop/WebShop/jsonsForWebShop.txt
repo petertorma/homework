@@ -4,7 +4,7 @@ Bejelentkezés:
 
 PUT:
 http://localhost:8080/WebShop-web/webresources/users/login/user/admin/pass/12 
-- rossz url. hibaüzenet jön. 
+- rossz url. hibaüzenet jön. ( nem megfelelő a jelszó ) 
 
 http://localhost:8080/WebShop-web/webresources/users/login/user/admin/pass/123 
 - jó url. beenged. admin felhasználó. 
@@ -19,32 +19,17 @@ PUT:
 http://localhost:8080/WebShop-web/webresources/users/user
 
  {
-"dateOfBirth": "1993-02-12",
 "firstname": "Rónáldo",
 "lastname": "Kanalas",
-"passowrd": "123",
-"registrationDate": "2015-02-02",
+"passowrd": "Aa123=",
 "username": "user"
  }
 
-ha megint lekérjük a usereket látjuk hogy megváltozik a firstname. 
+ha megint lekérjük a usereket látjuk hogy megváltozik a firstname és a jelszó. 
 
 User felhasználó törlése: 
 DELETE:
 http://localhost:8080/WebShop-web/webresources/users/user
-
-új felhasználó létrehozása: 
-POST:
-http://localhost:8080/WebShop-web/webresources/users
-
- {
-"dateOfBirth": "1993-02-12",
-"firstname": "USER",
-"lastname": "NEW",
-"passowrd": "123Aa=",
-"registrationDate": "2015-02-02",
-"username": "userNew"
- }
 
 Mobilok lekérdezése: 
 
@@ -54,7 +39,7 @@ http://localhost:8080/WebShop-web/webresources/mobile
 mobil hozzáadása az inventoryhoz: 
 POST:
 http://localhost:8080/WebShop-web/webresources/mobile/add
-ROSSZ KÍSÉRLET! a price 0. ami nem lehetséges. validálás közben megszakad. hibaüzenetet kapunk. 
+ROSSZ KÍSÉRLET! a price 0. ami nem lehetséges. validálás közben megszakad. hibaüzenetet kapunk. ( a price kisebb mint a megengedett! ( 1 ) )
 
  {
 "id": "2c0c56e5-719e-4337d-87f-604da1903bd2",
@@ -87,8 +72,8 @@ rossz kísérlet:
 }
 
 jó kísérlet: 
-{
-"id": "373c6250-dc59-4d59-80ad-4bdffc15b7c9",
+ {
+"id": "cb3c25a3-36ae-436b-a240-9f4e3c99d9cf",
 "manufacturer": "NOKIA",
 "piece": 3,
 "price": 10000,
