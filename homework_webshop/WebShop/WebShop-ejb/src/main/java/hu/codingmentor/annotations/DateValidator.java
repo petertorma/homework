@@ -14,7 +14,7 @@ public class DateValidator implements ConstraintValidator<DateAnnotation, UserDT
 
     @Override
     public boolean isValid(UserDTO user, ConstraintValidatorContext context) {
-      return user.getDateOfBirth().isBefore(user.getRegistrationDate());
+      return (user.getDateOfBirth()!= null) &&(user.getDateOfBirth().isBefore(user.getRegistrationDate()));
     }
 
 }

@@ -11,6 +11,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
+@IntValidator
 @DateAnnotation
 public class UserDTO {
 
@@ -49,7 +50,7 @@ public class UserDTO {
         //default
     }
 
-    public UserDTO(String username, String passowrd, String firstName, String lastName, String dateOfBirth, String  RegistrationDate) {
+    public UserDTO(String username, String passowrd, String firstName, String lastName, String dateOfBirth, String RegistrationDate) {
         this.username = username;
         this.passowrd = passowrd;
         this.firstname = firstName;

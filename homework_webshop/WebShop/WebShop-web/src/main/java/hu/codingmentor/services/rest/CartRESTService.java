@@ -22,7 +22,6 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 
 @Path("cart")
-@SessionScoped
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 public class CartRESTService implements Serializable {
@@ -37,6 +36,7 @@ public class CartRESTService implements Serializable {
     private UserManagementService userManagementService;
 
     private static final String USER = "user";
+
     @POST
     @IntValidator
     @Path("/add")
@@ -48,8 +48,8 @@ public class CartRESTService implements Serializable {
             throw new IllegalRequestException("There is no user logged in, or you hace called the checkout method");
         }
         for (MobileDTO mob : inventoryService.getMobileList()) {
-            if (mob.getId().equals(mobile.getId())) {
-                return cartService.addToCart(mobile);
+            if (mob.equals(mobile)) {
+                cartService.addToCart(mobile);
             } else {
                 throw new IllegalRequestException("there is no such mobile");
             }
@@ -81,7 +81,7 @@ public class CartRESTService implements Serializable {
         UserDTO user = userManagementService.getUser(username.toString());
         if ((username == null || !(username instanceof String)) || userManagementService.getUser(username.toString()) == null) {
             session.invalidate();
-            throw new IllegalRequestException("There is no user logged in"); //todo exception!
+            throw new IllegalRequestException("There is no user logged in, or you have already checked out"); 
         } else {
             List<MobileDTO> items = cartService.itemsInCart();
             cartService.checkout();
