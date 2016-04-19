@@ -1,13 +1,13 @@
 package hu.codingmentor.dto;
 
-import hu.codingmentor.annotations.IntValidator;
+import hu.codingmentor.annotations.Valid;
 import java.util.Objects;
 import java.util.UUID;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-@IntValidator
+@Valid
 public class MobileDTO {
 
     @Size(min = 36, max = 36)
@@ -31,7 +31,6 @@ public class MobileDTO {
         //default
     }
 
-    
     public MobileDTO(String type, String manufacturer, int price, int piece) {
         this.id = UUID.randomUUID().toString();
         this.type = type;

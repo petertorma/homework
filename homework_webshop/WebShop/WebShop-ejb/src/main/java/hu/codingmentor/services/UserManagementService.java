@@ -5,8 +5,6 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 import javax.annotation.PostConstruct;
-import javax.ejb.Lock;
-import javax.ejb.LockType;
 import javax.ejb.Singleton;
 import javax.ejb.Startup;
 
@@ -18,8 +16,8 @@ public class UserManagementService {
 
     @PostConstruct
     public void init() {
-        userList.put("admin", new UserDTO("admin", "123", "Peter", "Torma", "1995-05-02", "2016-02-02"));
-        userList.put("user", new UserDTO("user", "123", "Szkájvóker", "Kanalas", "1993-02-12", "2015-02-02"));
+        userList.put("admin", new UserDTO("admin", "Aa=123", "Peter", "Torma", "1995-05-02", "2016-02-02"));
+        userList.put("user", new UserDTO("user", "Aa=123", "Szkájvóker", "Kanalas", "1993-02-12", "2015-02-02"));
     }
 
     public UserDTO addUser(UserDTO user) {
@@ -36,12 +34,10 @@ public class UserManagementService {
         return user;
     }
     
-    @Lock(LockType.READ)
     public Collection<UserDTO> getUsers() {
         return userList.values();
     }
     
-    @Lock(LockType.READ)
     public UserDTO getUser(String username) {
         return userList.get(username);
     }

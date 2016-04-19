@@ -1,7 +1,7 @@
 package hu.codingmentor.services.rest;
 
 import hu.codingmentor.annotations.IntValidator;
-import hu.codingmentor.annotations.exceptions.IllegalRequestException;
+import hu.codingmentor.exceptions.IllegalRequestException;
 import hu.codingmentor.dto.MobileDTO;
 import hu.codingmentor.services.InventoryService;
 import hu.codingmentor.services.UserManagementService;

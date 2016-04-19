@@ -1,6 +1,6 @@
 package hu.codingmentor.services;
 
-import hu.codingmentor.annotations.exceptions.IllegalRequestException;
+import hu.codingmentor.exceptions.IllegalRequestException;
 import hu.codingmentor.dto.MobileDTO;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -15,7 +15,7 @@ import javax.ejb.Startup;
 
 @Singleton
 @Startup
-@ConcurrencyManagement(ConcurrencyManagementType.BEAN)
+@ConcurrencyManagement(ConcurrencyManagementType.CONTAINER)
 public class InventoryService {
 
     private final List<MobileDTO> mobiles = new ArrayList<>();

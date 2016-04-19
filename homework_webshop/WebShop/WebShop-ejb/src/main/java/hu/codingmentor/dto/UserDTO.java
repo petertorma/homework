@@ -1,7 +1,7 @@
 package hu.codingmentor.dto;
 
 import hu.codingmentor.annotations.DateAnnotation;
-import hu.codingmentor.annotations.IntValidator;
+import hu.codingmentor.annotations.Valid;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -11,7 +11,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
-@IntValidator
+@Valid
 @DateAnnotation
 public class UserDTO {
 
@@ -35,7 +35,6 @@ public class UserDTO {
     @NotNull
     private String lastname;
 
-    @NotNull
     LocalDate dateOfBirth;
 
     @NotNull

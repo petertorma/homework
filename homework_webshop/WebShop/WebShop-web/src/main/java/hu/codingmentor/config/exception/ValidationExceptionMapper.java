@@ -3,7 +3,7 @@ package hu.codingmentor.config.exception;
 
 
 import hu.codingmentor.dto.LoggerDTO;
-import hu.codingmentor.annotations.exceptions.ValidationException;
+import hu.codingmentor.exceptions.ValidationException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.inject.Inject;

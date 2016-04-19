@@ -19,5 +19,6 @@ public class ApplicationConfig extends Application {
         resources.add(hu.codingmentor.services.rest.CartRESTService.class);
         resources.add(hu.codingmentor.services.rest.InventoryRESTService.class);
         resources.add(hu.codingmentor.services.rest.UserRESTService.class);
+
     }
 }

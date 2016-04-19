@@ -1,7 +1,7 @@
 package hu.codingmentor.services.rest;
 
 import hu.codingmentor.annotations.IntValidator;
-import hu.codingmentor.annotations.exceptions.IllegalRequestException;
+import hu.codingmentor.exceptions.IllegalRequestException;
 import hu.codingmentor.dto.UserDTO;
 import hu.codingmentor.services.UserManagementService;
 import java.io.Serializable;
@@ -25,10 +25,18 @@ import javax.ws.rs.core.MediaType;
 @Produces(MediaType.APPLICATION_JSON)
 public class UserRESTService implements Serializable {
 
+    private String USER = "user";
+
     @Inject
     private UserManagementService userService;
 
-    private static final String USER = "user";
+    public String getUSER() {
+        return USER;
+    }
+
+    public void setUSER(String USER) {
+        this.USER = USER;
+    }
 
     @POST
     @IntValidator
@@ -87,12 +95,11 @@ public class UserRESTService implements Serializable {
             throw new BadRequestException("there is no user with this username");
         } else {
             UserDTO tempUser = userService.getUser(username);
-
             if (tempUser == null) {
                 session.invalidate();
                 throw new BadRequestException("there is no such a user:  " + username + " ,with this password" + password);
             } else if (tempUser.getPassowrd().equals(password)) {
-                session.setMaxInactiveInterval(2000);
+                session.setMaxInactiveInterval(20000);
                 session.setAttribute(USER, tempUser.getUsername());
                 return tempUser;
             } else {

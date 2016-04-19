@@ -10,7 +10,7 @@ import javax.validation.Payload;
 
 @Constraint(validatedBy = DateValidator.class)
 @Retention(RetentionPolicy.RUNTIME)
-@Target({ElementType.TYPE})
+@Target(ElementType.TYPE)
 public @interface DateAnnotation {
 
     String message() default "{Date.message}";
