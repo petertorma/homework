@@ -5,6 +5,7 @@ import hu.codingmentor.exceptions.IllegalRequestException;
 import hu.codingmentor.dto.UserDTO;
 import hu.codingmentor.services.UserManagementService;
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.Collection;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
@@ -59,10 +60,10 @@ public class UserRESTService implements Serializable {
     }
 
     @PUT
-    @IntValidator
     @Path("/{username}")
     @Consumes(MediaType.APPLICATION_JSON)
     public UserDTO editUser(@PathParam("username") String username, UserDTO user) {
+        user.setRegistrationDate(LocalDate.now());
         if (!user.getUsername().equals(username)) {
             throw new IllegalRequestException("you did not enter valid parameters to edit the user");
         }
@@ -80,7 +81,7 @@ public class UserRESTService implements Serializable {
     public UserDTO getUserByUsername(@PathParam("userName") String username) {
         userService.getUser(username);
         UserDTO user = userService.getUser(username);
-        if (!user.getUsername().equals(username)) {
+        if (!user.getUsername().equals(username) || userService.getUser(username) == null) {
             throw new IllegalRequestException("There is no user with these values");
         } else {
             return user;

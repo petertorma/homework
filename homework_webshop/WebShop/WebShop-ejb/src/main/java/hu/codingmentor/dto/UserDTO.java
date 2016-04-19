@@ -37,8 +37,8 @@ public class UserDTO {
 
     LocalDate dateOfBirth;
 
-    @NotNull
-    LocalDate RegistrationDate;
+    @NotNull(message = "you must give value for ")
+    LocalDate registrationDate;
 
     boolean admin = false;
 
@@ -49,13 +49,13 @@ public class UserDTO {
         //default
     }
 
-    public UserDTO(String username, String passowrd, String firstName, String lastName, String dateOfBirth, String RegistrationDate) {
+    public UserDTO(String username, String passowrd, String firstName, String lastName, String dateOfBirth, String registrationDate) {
         this.username = username;
         this.passowrd = passowrd;
         this.firstname = firstName;
         this.lastname = lastName;
         this.dateOfBirth = LocalDate.parse(dateOfBirth, dtf);
-        this.RegistrationDate = LocalDate.parse(RegistrationDate, dtf);
+        this.registrationDate = LocalDate.parse(registrationDate, dtf);
         this.setAdmin();
     }
 
@@ -69,11 +69,21 @@ public class UserDTO {
     }
 
     private void setAdmin() {
-        admin = "admin".equals(this.getUsername());
+        if ("admin".equals(this.username)) {
+            admin = true;
+        }
     }
 
     public List<MobileDTO> getCart() {
         return cart;
+    }
+
+    public LocalDate getRegistrationDate() {
+        return registrationDate;
+    }
+
+    public void setRegistrationDate(LocalDate registrationDate) {
+        this.registrationDate = registrationDate;
     }
 
     public void setCart(List<MobileDTO> cart) {
@@ -120,14 +130,6 @@ public class UserDTO {
         this.dateOfBirth = dateOfBirth;
     }
 
-    public LocalDate getRegistrationDate() {
-        return RegistrationDate;
-    }
-
-    public void setRegistrationDate(LocalDate RegistrationDate) {
-        this.RegistrationDate = RegistrationDate;
-    }
-
     @Override
     public int hashCode() {
         int hash = 7;
@@ -151,5 +153,10 @@ public class UserDTO {
             return false;
         }
         return true;
+    }
+
+    @Override
+    public String toString() {
+        return "UserDTO{" + "username=" + username + ", passowrd=" + passowrd + ", firstname=" + firstname + ", lastname=" + lastname + ", dateOfBirth=" + dateOfBirth + ", registrationDate=" + registrationDate + ", admin=" + admin + ", dtf=" + dtf + '}';
     }
 }

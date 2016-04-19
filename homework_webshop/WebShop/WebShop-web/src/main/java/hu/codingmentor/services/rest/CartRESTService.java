@@ -42,7 +42,7 @@ public class CartRESTService implements Serializable {
     @Path("/add")
     public List<MobileDTO> addToCart(@Context HttpServletRequest request, MobileDTO mobile) {
         HttpSession session = request.getSession(true);
-        session.setMaxInactiveInterval(1000);
+        session.setMaxInactiveInterval(2000);
         Object username = session.getAttribute(USER);
         if ((username == null || !(username instanceof String)) || userManagementService.getUser(username.toString()) == null) {
             session.invalidate();
