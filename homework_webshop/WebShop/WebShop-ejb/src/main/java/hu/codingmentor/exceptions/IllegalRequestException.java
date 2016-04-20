@@ -1,4 +1,3 @@
-
 package hu.codingmentor.exceptions;
 
 import javax.ejb.ApplicationException;

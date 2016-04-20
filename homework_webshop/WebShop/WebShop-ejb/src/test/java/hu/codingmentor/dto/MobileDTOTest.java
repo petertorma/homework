@@ -1,4 +1,4 @@
-package hu.codingmentor.dto.test;
+package hu.codingmentor.dto;
 
 import hu.codingmentor.dto.MobileDTO;
 import hu.codingmentor.dto.UserDTO;
@@ -17,13 +17,22 @@ public class MobileDTOTest {
     private static final Validator validatior = vf.getValidator();
 
     @Test
+    public void shouldRaiseExceptionInvalidId() {
+        MobileDTO mobile = new MobileDTO("xperia  z", "sony", 1, 1);
+        mobile.setId("s");
+        List<ConstraintViolation<UserDTO>> violations = new ArrayList(validatior.validate(mobile));
+        Assert.assertEquals(1, violations.size());
+        Assert.assertEquals("s", violations.get(0).getInvalidValue());
+        vf.close();
+    }
+
+    @Test
     public void shouldRaiseExceptionInvalidPrice() {
         MobileDTO mobile = new MobileDTO("xperia  z", "sony", 0, 1);
         List<ConstraintViolation<UserDTO>> violations = new ArrayList(validatior.validate(mobile));
         Assert.assertEquals(1, violations.size());
         Assert.assertEquals(0, violations.get(0).getInvalidValue());
         vf.close();
-
     }
 
     @Test
@@ -42,7 +51,15 @@ public class MobileDTOTest {
         Assert.assertEquals(1, violations.size());
         Assert.assertEquals(null, violations.get(0).getInvalidValue());
         vf.close();
+    }
 
+    @Test
+    public void shouldRaiseExceptionShortType() {
+        MobileDTO mobile = new MobileDTO("aa", "sony", 5000, 1);
+        List<ConstraintViolation<UserDTO>> violations = new ArrayList(validatior.validate(mobile));
+        Assert.assertEquals(1, violations.size());
+        Assert.assertEquals("aa", violations.get(0).getInvalidValue());
+        vf.close();
     }
 
     @Test
@@ -51,6 +68,16 @@ public class MobileDTOTest {
         List<ConstraintViolation<UserDTO>> violations = new ArrayList(validatior.validate(mobile));
         Assert.assertEquals(1, violations.size());
         Assert.assertEquals("SO", violations.get(0).getInvalidValue());
+        vf.close();
+    }
+
+    @Test
+    public void shouldRaiseExceptionCauseNullManufacturer() {
+        MobileDTO mobile = new MobileDTO("Xperia p", null, 40000, 1);
+        List<ConstraintViolation<UserDTO>> violations = new ArrayList(validatior.validate(mobile));
+        Assert.assertEquals(1, violations.size());
+        Assert.assertEquals(null, violations.get(0).getInvalidValue());
+        Assert.assertEquals(mobile.getClass(), violations.get(0).getRootBeanClass());
         vf.close();
     }
 

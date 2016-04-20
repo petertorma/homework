@@ -53,11 +53,8 @@ public class InventoryService {
             if (mobile.getId().equals(mob.getId()) && mob.getPiece() > 0) {
                 mob.setPiece(mob.getPiece() - 1);
                 return mob;
-            } else {
-                throw new IllegalRequestException("there is no more mobile : " + mob.getType() + " : " + mob.getManufacturer());
             }
         }
         throw new IllegalRequestException("there is no such product");
     }
-
 }

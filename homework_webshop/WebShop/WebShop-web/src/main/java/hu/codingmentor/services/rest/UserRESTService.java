@@ -26,18 +26,11 @@ import javax.ws.rs.core.MediaType;
 @Produces(MediaType.APPLICATION_JSON)
 public class UserRESTService implements Serializable {
 
-    private String USER = "user";
-
     @Inject
     private UserManagementService userService;
 
-    public String getUSER() {
-        return USER;
-    }
-
-    public void setUSER(String USER) {
-        this.USER = USER;
-    }
+    @Inject
+    private CartRESTService cartRestService;
 
     @POST
     @IntValidator
@@ -92,6 +85,7 @@ public class UserRESTService implements Serializable {
     @Path("/login/user/{username}/pass/{password}")
     public UserDTO login(@Context HttpServletRequest request, @PathParam("username") String username, @PathParam("password") String password) {
         HttpSession session = request.getSession(true);
+        session.setMaxInactiveInterval(3000);
         if (!(userService.getUser(username) instanceof UserDTO)) {
             throw new BadRequestException("there is no user with this username");
         } else {
@@ -101,7 +95,7 @@ public class UserRESTService implements Serializable {
                 throw new BadRequestException("there is no such a user:  " + username + " ,with this password" + password);
             } else if (tempUser.getPassowrd().equals(password)) {
                 session.setMaxInactiveInterval(20000);
-                session.setAttribute(USER, tempUser.getUsername());
+                session.setAttribute(cartRestService.getUSER(), tempUser.getUsername());
                 return tempUser;
             } else {
                 session.invalidate();

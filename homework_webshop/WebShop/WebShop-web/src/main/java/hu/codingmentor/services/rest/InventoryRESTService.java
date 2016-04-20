@@ -28,13 +28,14 @@ public class InventoryRESTService {
     @Inject
     private UserManagementService userManagementService;
 
-    private static final String USER = "user";
+    @Inject
+    private CartRESTService cartRestService;
 
     @POST
     @IntValidator
     public MobileDTO addMobile(@Context HttpServletRequest request, MobileDTO mobile) {
         HttpSession session = request.getSession(true);
-        Object username = session.getAttribute(USER);
+        Object username = session.getAttribute(cartRestService.getUSER());
         if ((username == null || !(username instanceof String)) || userManagementService.getUser(username.toString()) == null) {
             session.invalidate();
             throw new IllegalRequestException("There is no user logged in");

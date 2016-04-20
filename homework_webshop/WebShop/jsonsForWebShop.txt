@@ -18,14 +18,14 @@ user felhasználó szerkesztése:
 PUT:
 http://localhost:8080/WebShop-web/webresources/users/user
 
- {
-"firstname": "Rónáldo",
-"lastname": "Kanalas",
-"passowrd": "Aa123=",
-"username": "user"
- }
+{    
+    "firstname": "newName",
+    "lastname": "Kanalas",
+    "passowrd": "Aa=123",
+    "username": "user"
+}
 
-ha megint lekérjük a usereket látjuk hogy megváltozik a firstname és a jelszó. 
+ha megint lekérjük a usereket látjuk hogy megváltozik a firstname.
 
 User felhasználó törlése: 
 DELETE:
@@ -71,15 +71,14 @@ rossz kísérlet:
 "type": "e250"
 }
 
-jó kísérlet: 
+jó kísérlet: ( valamiért nem mindig fogadja el a rest client ha így másolom, viszont ha lekérem a mobiloket get el és onnan másolom ki akkor jó ) 
  {
-"id": "cb3c25a3-36ae-436b-a240-9f4e3c99d9cf",
-"manufacturer": "NOKIA",
-"piece": 3,
-"price": 10000,
-"type": "e250"
-}
-
+        "id": "9b76e40f-8a13-402b-a1c8-3f7baa189c4f",
+        "manufacturer": "SAMSUNG",
+        "piece": 12,
+        "price": 20000,
+        "type": "h550"
+    }
 kosár lekérdezése: 
 GET:
 http://localhost:8080/WebShop-web/webresources/cart/

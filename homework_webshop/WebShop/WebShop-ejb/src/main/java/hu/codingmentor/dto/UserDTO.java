@@ -30,17 +30,17 @@ public class UserDTO {
     }
     )
     private String passowrd;
-    @NotNull
+
     private String firstname;
-    @NotNull
+
     private String lastname;
 
-    LocalDate dateOfBirth;
+    private LocalDate dateOfBirth;
 
     @NotNull(message = "you must give value for ")
-    LocalDate registrationDate;
+    private LocalDate registrationDate;
 
-    boolean admin = false;
+    private boolean admin = false;
 
     final DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
     List<MobileDTO> cart = new ArrayList<>();

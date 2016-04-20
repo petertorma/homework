@@ -7,20 +7,20 @@ import javax.ejb.Asynchronous;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 
+
 @Stateless
 public class AsyncService {
-
+    
     @Inject
     private Logger LOGGER;
-
+            
     @Asynchronous
     public Future<String> asyncronTest() throws InterruptedException {
-        LOGGER.info("asnyron method is being called.");
+        
         for (int i = 0; i < 10; i++) {
-            Thread.sleep(300);
-            LOGGER.info("asyncron call  " + i);
+            LOGGER.info("asyncron method "+i);
         }
         return new AsyncResult<>("Asyncron method finished working");
-
     }
+    
 }

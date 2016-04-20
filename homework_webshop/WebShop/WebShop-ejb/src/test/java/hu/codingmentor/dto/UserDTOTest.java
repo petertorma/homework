@@ -1,4 +1,4 @@
-package hu.codingmentor.dto.test;
+package hu.codingmentor.dto;
 
 import hu.codingmentor.dto.UserDTO;
 import java.util.ArrayList;
@@ -29,6 +29,7 @@ public class UserDTOTest {
         List<ConstraintViolation<UserDTO>> violations = new ArrayList(validatior.validate(user));
         Assert.assertEquals(1, violations.size());
         Assert.assertEquals(null, violations.get(0).getInvalidValue());
+        Assert.assertEquals(user.getClass(), violations.get(0).getRootBeanClass());
         vf.close();
     }
 
@@ -42,7 +43,7 @@ public class UserDTOTest {
     }
 
     @Test
-    public void shouldNotRaiseExceptionBadPassword() {
+    public void shouldRaiseExceptionBadPassword() {
         UserDTO user = new UserDTO("TestUsername", "password", "TestFirst", "TestLast", "1995-11-12", "2013-12-12");
         List<ConstraintViolation<UserDTO>> violations = new ArrayList(validatior.validate(user));
         Assert.assertEquals(3, violations.size());
@@ -51,37 +52,39 @@ public class UserDTOTest {
     }
 
     @Test
-    public void shouldNotRaiseExceptionNullPassword() {
+    public void shoultRaiseExceptionShortPassword() {
+        UserDTO user = new UserDTO("TestUsername", "Aa=3", "TestFirst", "TestLast", "1995-11-12", "2013-12-12");
+        List<ConstraintViolation<UserDTO>> violations = new ArrayList(validatior.validate(user));
+        Assert.assertEquals(1, violations.size());
+        Assert.assertEquals("Aa=3", violations.get(0).getInvalidValue());
+        vf.close();
+    }
+
+    @Test
+    public void shoultRaiseExceptionInvalidPassword() {
+        UserDTO user = new UserDTO("TestUsername", "Aa3Aaa", "TestFirst", "TestLast", "1995-11-12", "2013-12-12");
+        List<ConstraintViolation<UserDTO>> violations = new ArrayList(validatior.validate(user));
+        Assert.assertEquals(1, violations.size());
+        Assert.assertEquals("Aa3Aaa", violations.get(0).getInvalidValue());
+        vf.close();
+    }
+
+    @Test
+    public void shouldRaiseExceptionNullPassword() {
         UserDTO user = new UserDTO("TestUsername", null, "TestFirst", "TestLast", "1995-11-12", "2013-12-12");
         List<ConstraintViolation<UserDTO>> violations = new ArrayList(validatior.validate(user));
         Assert.assertEquals(1, violations.size());
         Assert.assertEquals(null, violations.get(0).getInvalidValue());
+        Assert.assertEquals(user.getClass(), violations.get(0).getRootBeanClass());
     }
 
     @Test
-    public void shouldRaiseExceptionNullFirstName() {
-        UserDTO user = new UserDTO("TestUsername", "Pdsad5=", null, "TestLast", "1995-11-12", "2013-12-12");
-        List<ConstraintViolation<UserDTO>> violations = new ArrayList(validatior.validate(user));
-        Assert.assertEquals(1, violations.size());
-        Assert.assertEquals(null, violations.get(0).getInvalidValue());
-        vf.close();
-    }
-
-    @Test
-    public void shouldNotRaiseExceptionNullLastName() {
-        UserDTO user = new UserDTO("TestUsername", "Pdsad5=", "TestFirst", null, "1995-11-12", "2013-12-12");
-        List<ConstraintViolation<UserDTO>> violations = new ArrayList(validatior.validate(user));
-        Assert.assertEquals(1, violations.size());
-        Assert.assertEquals(null, violations.get(0).getInvalidValue());
-        vf.close();
-    }
-
-    @Test
-    public void shouldNotRaiseExceptionNullRegisterBeforeBirth() {
+    public void shouldRaiseExceptionNullRegisterBeforeBirth() {
         UserDTO user = new UserDTO("TestUsername", "Pdsad5=", "TestFirst", "TestLast", "1995-12-13", "1913-12-12");
         List<ConstraintViolation<UserDTO>> violations = new ArrayList(validatior.validate(user));
         Assert.assertEquals(1, violations.size());
         Assert.assertEquals(user, violations.get(0).getInvalidValue());
         vf.close();
     }
+
 }

@@ -16,6 +16,9 @@ public class CartService {
 
     private final List<MobileDTO> products = new ArrayList<>();
 
+    public CartService() {
+    }
+
     public List<MobileDTO> addToCart(MobileDTO product) {
         products.add(product);
         return products;
@@ -23,9 +26,6 @@ public class CartService {
 
     public List<MobileDTO> itemsInCart() {
         return products;
-    }
-
-    public CartService() {
     }
 
     public void checkout() {
