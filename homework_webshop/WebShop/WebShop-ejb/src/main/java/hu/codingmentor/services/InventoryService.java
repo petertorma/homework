@@ -21,6 +21,7 @@ public class InventoryService {
     private final List<MobileDTO> mobiles = new ArrayList<>();
 
     public InventoryService() {
+        //default
     }
 
     @PostConstruct

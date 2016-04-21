@@ -18,6 +18,8 @@ public class UserManagementService {
     @PostConstruct
     public void init() {
         userList.put("admin", new UserDTO("admin", "Aa=123", "Peter", "Torma", "1995-05-02", "2016-02-02"));
+        UserDTO user = userList.get("admin");
+        user.setAdmin(true);
         userList.put("user", new UserDTO("user", "Aa=123", "Szkájvóker", "Kanalas", "1993-02-12", "2015-02-02"));
     }
 

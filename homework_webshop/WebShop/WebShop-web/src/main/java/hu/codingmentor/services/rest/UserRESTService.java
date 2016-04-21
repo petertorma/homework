@@ -29,9 +29,6 @@ public class UserRESTService implements Serializable {
     @Inject
     private UserManagementService userService;
 
-    @Inject
-    private CartRESTService cartRestService;
-
     @POST
     @IntValidator
     @Consumes(MediaType.APPLICATION_JSON)
@@ -85,23 +82,19 @@ public class UserRESTService implements Serializable {
     @Path("/login/user/{username}/pass/{password}")
     public UserDTO login(@Context HttpServletRequest request, @PathParam("username") String username, @PathParam("password") String password) {
         HttpSession session = request.getSession(true);
-        session.setMaxInactiveInterval(3000);
-        if (!(userService.getUser(username) instanceof UserDTO)) {
-            throw new BadRequestException("there is no user with this username");
+        UserDTO tempUser = userService.getUser(username);
+        if (tempUser == null) {
+            session.invalidate();
+            throw new BadRequestException("there is no such a user:  " + username + " ,with this password" + password);
+        } else if (tempUser.getPassowrd().equals(password)) {
+            session.setMaxInactiveInterval(20000);
+            session.setAttribute(CartRESTService.USER, tempUser.getUsername());
+            return tempUser;
         } else {
-            UserDTO tempUser = userService.getUser(username);
-            if (tempUser == null) {
-                session.invalidate();
-                throw new BadRequestException("there is no such a user:  " + username + " ,with this password" + password);
-            } else if (tempUser.getPassowrd().equals(password)) {
-                session.setMaxInactiveInterval(20000);
-                session.setAttribute(cartRestService.getUSER(), tempUser.getUsername());
-                return tempUser;
-            } else {
-                session.invalidate();
-                throw new IllegalRequestException("you did not enter correct parameters to login");
-            }
+            session.invalidate();
+            throw new IllegalRequestException("you did not enter correct parameters to login");
         }
+        
     }
 
     @POST

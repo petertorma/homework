@@ -5,6 +5,7 @@ public class LoggerDTO {
     private String errorMessage;
 
     public LoggerDTO() {
+        //default
     }
 
     public LoggerDTO(String message) {

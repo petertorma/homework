@@ -8,7 +8,7 @@ public class DateValidator implements ConstraintValidator<DateAnnotation, UserDT
 
     @Override
     public void initialize(DateAnnotation constraintAnnotation) {
-
+        //init
     }
 
     @Override

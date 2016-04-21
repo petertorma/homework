@@ -17,6 +17,7 @@ public class CartService {
     private final List<MobileDTO> products = new ArrayList<>();
 
     public CartService() {
+        //default
     }
 
     public List<MobileDTO> addToCart(MobileDTO product) {
@@ -29,9 +30,7 @@ public class CartService {
     }
 
     public void checkout() {
-        products.stream().forEach((product) -> {
-            inventoryService.buyMobile(product);
-        });
+        products.stream().forEach(inventoryService::buyMobile);
         products.clear();
     }
 }

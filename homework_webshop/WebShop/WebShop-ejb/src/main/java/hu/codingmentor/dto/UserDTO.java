@@ -56,7 +56,6 @@ public class UserDTO {
         this.lastname = lastName;
         this.dateOfBirth = LocalDate.parse(dateOfBirth, dtf);
         this.registrationDate = LocalDate.parse(registrationDate, dtf);
-        this.setAdmin();
     }
 
     public UserDTO(String username, String passowrd) {
@@ -68,10 +67,8 @@ public class UserDTO {
         return admin;
     }
 
-    private void setAdmin() {
-        if ("admin".equals(this.username)) {
-            admin = true;
-        }
+    public void setAdmin(boolean admin) {
+        this.admin = admin;
     }
 
     public List<MobileDTO> getCart() {

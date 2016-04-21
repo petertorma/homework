@@ -18,7 +18,7 @@ public class ValidatorInterceptor {
     private Validator validator;
 
     @AroundInvoke
-    public Object invoke(InvocationContext invocationContext) throws Exception {
+    public Object invoke(InvocationContext invocationContext) throws Exception  {
         validateParameters(invocationContext.getParameters());
         return invocationContext.proceed();
     }

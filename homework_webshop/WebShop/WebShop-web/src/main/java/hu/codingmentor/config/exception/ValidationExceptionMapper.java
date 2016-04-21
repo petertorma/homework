@@ -19,7 +19,7 @@ public class ValidationExceptionMapper implements ExceptionMapper<ValidationExce
     @Override
     public Response toResponse(ValidationException exception) {
 
-        logger.log(Level.FINER, "Bean validation exception ", exception);
+        logger.log(Level.WARNING, "Bean validation exception");
         return Response.status(Response.Status.BAD_REQUEST).entity(new LoggerDTO(exception.getMessage())
         ).type(MediaType.APPLICATION_JSON).build();
 

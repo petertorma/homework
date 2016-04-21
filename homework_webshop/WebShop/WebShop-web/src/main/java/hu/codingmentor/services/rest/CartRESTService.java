@@ -1,9 +1,7 @@
 package hu.codingmentor.services.rest;
 
-import hu.codingmentor.annotations.IntValidator;
 import hu.codingmentor.exceptions.IllegalRequestException;
 import hu.codingmentor.dto.MobileDTO;
-import hu.codingmentor.dto.UserDTO;
 import hu.codingmentor.services.CartService;
 import hu.codingmentor.services.InventoryService;
 import hu.codingmentor.services.UserManagementService;
@@ -37,17 +35,13 @@ public class CartRESTService implements Serializable {
     @Inject
     private UserManagementService userManagementService;
 
-    private static final String USER = "user";
-
-    public static String getUSER() {
-        return USER;
-    }
+    public static final String USER = "user";
 
     @POST
     @Path("/add")
     public List<MobileDTO> addToCart(@Context HttpServletRequest request, MobileDTO mobile) {
         HttpSession session = request.getSession(true);
-        Object username = session.getAttribute(getUSER());
+        Object username = session.getAttribute(USER);
         if ((username == null || !(username instanceof String)) || userManagementService.getUser(username.toString()) == null) {
             session.invalidate();
             throw new IllegalRequestException("There is no user logged in.");
@@ -55,25 +49,22 @@ public class CartRESTService implements Serializable {
             for (MobileDTO mob : inventoryService.getMobileList()) {
                 if (mobile.equals(mob)) {
                     cartService.addToCart(mobile);
-                }
-                else{
+                } else {
                     throw new BadRequestException("you did not enter valid parameters");
                 }
             }
             return cartService.itemsInCart();
         }
-
     }
 
     @GET
     @Path("/")
     public List<MobileDTO> itemsInCart(@Context HttpServletRequest request) {
-
         HttpSession session = request.getSession(true);
-        Object username = session.getAttribute(getUSER());
+        Object username = session.getAttribute(USER);
         if ((username == null || !(username instanceof String)) || userManagementService.getUser(username.toString()) == null) {
             session.invalidate();
-            throw new IllegalRequestException("There is no user logged in, or the customer already checked out");  // TODO create a runtime exception
+            throw new IllegalRequestException("There is no user logged in, or the customer already checked out");
         } else {
             return cartService.itemsInCart();
         }
@@ -82,10 +73,8 @@ public class CartRESTService implements Serializable {
     @GET
     @Path("/checkout")
     public List<MobileDTO> checkout(@Context HttpServletRequest request) {
-
         HttpSession session = request.getSession(true);
-        Object username = session.getAttribute(getUSER());
-        UserDTO user = userManagementService.getUser(username.toString());
+        Object username = session.getAttribute(USER);
         if ((username == null || !(username instanceof String)) || userManagementService.getUser(username.toString()) == null) {
             session.invalidate();
             throw new IllegalRequestException("There is no user logged in, or you have already checked out");
@@ -96,5 +85,4 @@ public class CartRESTService implements Serializable {
             return items;
         }
     }
-
 }

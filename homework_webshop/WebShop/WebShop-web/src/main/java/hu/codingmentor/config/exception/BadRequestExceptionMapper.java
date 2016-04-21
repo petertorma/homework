@@ -19,7 +19,7 @@ public class BadRequestExceptionMapper implements ExceptionMapper<IllegalRequest
 
     @Override
     public Response toResponse(IllegalRequestException exception) {
-        logger.log(Level.ALL, "Illegal Request ", exception);
+        logger.log(Level.SEVERE, "Illegal Request ", exception);
         return Response.status(Response.Status.BAD_REQUEST).entity(
                 new ExceptionDTO(exception.getMessage())
         ).type(MediaType.APPLICATION_JSON).build();
