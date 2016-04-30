@@ -3,7 +3,6 @@ package tp.jpnpark.entities;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -11,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
@@ -29,7 +29,8 @@ public class Park implements Serializable {
     @NotNull
     private String name;
 
-    @Embedded
+    @OneToOne
+    @NotNull
     private Address adress;
 
     @NotNull
@@ -40,11 +41,22 @@ public class Park implements Serializable {
 
     @OneToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "machinesInPark",
-            joinColumns = @JoinColumn(name = "park-fk"),
-            inverseJoinColumns = @JoinColumn(name = "machine_fk"))
+            joinColumns = @JoinColumn(name = "parkfk"),
+            inverseJoinColumns = @JoinColumn(name = "machine"
+                    + "fk"))
     List<Machine> machines = new ArrayList<>();
 
+    private int ticketPrice;
+
     public Park() {
+    }
+
+    public int getTicketPrice() {
+        return ticketPrice;
+    }
+
+    public void setTicketPrice(int ticketPrice) {
+        this.ticketPrice = ticketPrice;
     }
 
     public String getName() {

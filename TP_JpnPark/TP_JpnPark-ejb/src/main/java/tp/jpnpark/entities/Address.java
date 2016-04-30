@@ -1,15 +1,20 @@
 package tp.jpnpark.entities;
 
 import java.io.Serializable;
-import javax.persistence.Embeddable;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 
 /**
  *
  * @author Torma Péter
  */
-@Embeddable
+@Entity
 public class Address implements Serializable {
 
+    @Id
+    @GeneratedValue
+    private Long id;
     private String zipCode;
     private String country;
     private String city;
@@ -19,6 +24,8 @@ public class Address implements Serializable {
     public Address() {
     }
 
+    
+    
     public String getZipCode() {
         return zipCode;
     }
@@ -57,6 +64,14 @@ public class Address implements Serializable {
 
     public void setHouseNumber(String houseNumber) {
         this.houseNumber = houseNumber;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
 }

@@ -1,20 +1,24 @@
 package tp.jpnpark.entities;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDate;
+import java.util.HashMap;
+import java.util.Map;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 /**
  *
  * @author Torma Péter
  */
 @Entity
+//@NamedQuery(name = "logByVisitor",
+//        query = "SELECT gb FROM Guestbook gb WHERE gb.amusementPark.parkId = :parkId AND gb.visitor.visitorId = :visitorId")
 public class GuestBook implements Serializable {
 
     @Id
@@ -23,26 +27,31 @@ public class GuestBook implements Serializable {
 
     @OneToOne
     @JoinColumn(name = "park_fk")
-    private Park parkId;
+    private Park park;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "visitor_fk")
     private Visitor visitorId;
 
-    @Temporal(TemporalType.DATE)
-    private Date dateOfEntry;
-
-    private String logEntry;
+    private Map<LocalDate, String> logs = new HashMap<>();
 
     public GuestBook() {
     }
 
-    public Park getParkId() {
-        return parkId;
+    public Map<LocalDate, String> getLogs() {
+        return logs;
     }
 
-    public void setParkId(Park parkId) {
-        this.parkId = parkId;
+    public void setLogs(Map<LocalDate, String> logs) {
+        this.logs = logs;
+    }
+
+    public Park getPark() {
+        return park;
+    }
+
+    public void setPark(Park park) {
+        this.park = park;
     }
 
     public Visitor getVisitorId() {
@@ -51,22 +60,6 @@ public class GuestBook implements Serializable {
 
     public void setVisitorId(Visitor visitorId) {
         this.visitorId = visitorId;
-    }
-
-    public Date getDateOfEntry() {
-        return dateOfEntry;
-    }
-
-    public void setDateOfEntry(Date dateOfEntry) {
-        this.dateOfEntry = dateOfEntry;
-    }
-
-    public String getLogEntry() {
-        return logEntry;
-    }
-
-    public void setLogEntry(String logEntry) {
-        this.logEntry = logEntry;
     }
 
     public Long getId() {

@@ -1,8 +1,10 @@
 package tp.jpnpark.facade;
 
+import java.util.List;
 import java.util.logging.Logger;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.criteria.CriteriaQuery;
 
 /**
  *
@@ -38,6 +40,12 @@ public class EntityFacade {
 
     public <T> T find(Class<T> clazz, Object id) {
         return entityManager.find(clazz, id);
+    }
+
+    public <T> List<T> findAll(Class<T> entityClass) {
+        CriteriaQuery cq = entityManager.getCriteriaBuilder().createQuery();
+        cq.select(cq.from(entityClass));
+        return entityManager.createQuery(cq).getResultList();
     }
 
 }
