@@ -11,6 +11,7 @@ public class ExceptionDTO {
     private String errorMessage;
 
     public ExceptionDTO() {
+        //default
     }
 
     public ExceptionDTO(String errorMessage) {

@@ -47,7 +47,7 @@ public class ParkRESTService implements Serializable {
     @DELETE
     @Path("/delete/{parkId}")
     public void delete(@PathParam("parkId") long parkId) {
-        parkService.Delete(parkId);
+        parkService.delete(parkId);
     }
 
     @PUT
@@ -65,7 +65,7 @@ public class ParkRESTService implements Serializable {
     @POST
     @Path("/log/{visitorId}/{parkId}/{gbId}")
     public void log(@PathParam("visitorId") long visitorId, @PathParam("parkId") long parkId, @PathParam("gbId") long gbId, String message) {
-        parkService.LogIntoGuestBook(parkId, visitorId, gbId, message);
+        parkService.logIntoGuestBook(parkId, visitorId, gbId, message);
     }
 
     @DELETE
@@ -93,7 +93,7 @@ public class ParkRESTService implements Serializable {
     }
     
     @GET
-    @Path("/logs/{parkId}{gbId}")
+    @Path("/logs/{parkId}/{gbId}")
     public String getLogs(@PathParam("parkId") long parkId,@PathParam("gbId") long gbId){
         return parkService.getGuestBookLogs(parkId,gbId);
     }

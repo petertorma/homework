@@ -14,40 +14,42 @@ import tp.jpnpark.facade.EntityFacade;
  * @author Torma Péter
  */
 @Stateless
-public class QueryServices {
+public class QueryServices  {
 
     @Inject
     private EntityFacade entityManager;
-    /*
-    public List<GuestBook> logByVisitor(Long parkId, Long visitorId) {
+    
+    private static final String PARAMS="parkId";
+    
+    public List<GuestBook> logByVisitor(Long id, Long visitorId) {
         TypedQuery<GuestBook> guestbooks = entityManager.getEntityManager().createNamedQuery("logByVisitor", GuestBook.class);
-        guestbooks.setParameter("parkId", parkId);
+        guestbooks.setParameter(PARAMS, id);
         guestbooks.setParameter("visitorId", visitorId);
         return guestbooks.getResultList();
     }
 
-       public List<Visitor> visitorsOnMachine(Long machineId) {
-    TypedQuery<Visitor> visitors = entityManager.getEntityManager().createNamedQuery("visitorsOnMachine", Visitor.class);
-    visitors.setParameter("machineId", machineId);
-    return visitors.getResultList();
+    public List<Visitor> visitorsOnMachine(Long machineId) {
+        TypedQuery<Visitor> visitors = entityManager.getEntityManager().createNamedQuery("visitorsOnMachine", Visitor.class);
+        visitors.setParameter("machineId", machineId);
+        return visitors.getResultList();
     }
-    
-    public Integer tiredVisitors(Long parkId) {
-    TypedQuery<Integer> visitors = entityManager.getEntityManager().createNamedQuery("tiredVisitors", Integer.class);
-    visitors.setParameter("parkId", parkId);
-    return visitors.getSingleResult();
+
+    public String tiredVisitors(Long parkId) {
+        TypedQuery<Long> visitors = entityManager.getEntityManager().createNamedQuery("tiredVisitors", Long.class);
+        visitors.setParameter(PARAMS, parkId);
+        return visitors.getSingleResult().toString();
     }
 
     public List<Machine> machinesInPark(Long parkId) {
         TypedQuery<Machine> machines = entityManager.getEntityManager().createNamedQuery("machinesInPark", Machine.class);
-        machines.setParameter("parkId", parkId);
+        machines.setParameter(PARAMS, parkId);
         return machines.getResultList();
     }
-    
-    public Integer actionVisitors(Long parkId) {
-    TypedQuery<Integer> visitors = entityManager.getEntityManager().createNamedQuery("actionVisitors", Integer.class);
-    visitors.setParameter("parkId", parkId);
-    return visitors.getSingleResult();
-    }*/
+
+    public String actionVisitors(Long parkId) {
+        TypedQuery<Long> visitors = entityManager.getEntityManager().createNamedQuery("actionVisitors", Long.class);
+        visitors.setParameter(PARAMS, parkId);
+        return visitors.getSingleResult().toString();
+    }
 
 }

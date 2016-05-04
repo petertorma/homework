@@ -22,6 +22,7 @@ public class Address implements Serializable {
     private String houseNumber;
 
     public Address() {
+        //default
     }
 
     

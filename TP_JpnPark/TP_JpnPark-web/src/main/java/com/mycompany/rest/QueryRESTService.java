@@ -25,7 +25,7 @@ public class QueryRESTService implements Serializable {
 
     @Inject
     QueryServices queryService;
-/*
+
     
     @GET
     @Path("/machines/{parkId}")
@@ -47,14 +47,14 @@ public class QueryRESTService implements Serializable {
     
     @GET
     @Path("/actionVisitors/{parkId}")
-    public Integer actionVisitors(@PathParam("parkId") Long parkId) {
+    public String actionVisitors(@PathParam("parkId") Long parkId) {
     return queryService.actionVisitors(parkId);
     }
     
     @GET
     @Path("/tiredVisitors/{parkId}")
-    public Integer tiredVisitors(@PathParam("parkId") Long parkId) {
+    public String tiredVisitors(@PathParam("parkId") Long parkId) {
     return queryService.tiredVisitors(parkId);
-    }*/
+    }
 
 }

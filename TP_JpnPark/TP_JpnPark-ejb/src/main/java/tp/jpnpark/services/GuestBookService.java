@@ -5,7 +5,7 @@ import javax.inject.Inject;
 import tp.jpnpark.entities.GuestBook;
 import tp.jpnpark.entities.Park;
 import tp.jpnpark.entities.Visitor;
-import tp.jpnpark.exceptions.BookNotExists;
+import tp.jpnpark.exceptions.InvalidValues;
 import tp.jpnpark.facade.EntityFacade;
 
 /**
@@ -26,7 +26,7 @@ public class GuestBookService {
 
     public boolean checkGuestBook(long gbId) {
         if (entityManager.find(GuestBook.class, gbId) == null) {
-            throw new BookNotExists("book not exists with this ID:  " + gbId);
+            throw new InvalidValues("book not exists with this ID:  " + gbId);
         }
         return true;
     }
@@ -39,7 +39,7 @@ public class GuestBookService {
         Visitor visitor = entityManager.find(Visitor.class, visitorId);
 
         if (!visitor.getPark().getId().equals(park.getId())) {
-            throw new RuntimeException("the visitor is not in this park");
+            throw new InvalidValues("the visitor is not in this park");
         }
         gb.setPark(park);
         gb.setVisitorId(visitor);
@@ -62,7 +62,6 @@ public class GuestBookService {
 
     public void delete(long gbId) {
         checkGuestBook(gbId);
-        GuestBook tempGb = entityManager.find(GuestBook.class, gbId);
         entityManager.delete(gbId);
     }
 }

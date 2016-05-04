@@ -6,7 +6,6 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 import javax.validation.constraints.NotNull;
 import tp.jpnpark.enums.TypeOfMachines;
@@ -16,8 +15,8 @@ import tp.jpnpark.enums.TypeOfMachines;
  * @author Torma Péter
  */
 @Entity
-//@NamedQuery(name = "machinesInPark",
-  //  query = "SELECT m FROM Machine m WHERE m.park.parkId = :parkId")
+@NamedQuery(name = "machinesInPark",
+    query = "SELECT m FROM Machine m WHERE m.parkID = :parkId")
 public class Machine implements Serializable {
 
     @Id
@@ -39,10 +38,9 @@ public class Machine implements Serializable {
     @NotNull(message = "capacity vannot be null")
     private int capacity;
 
-    private int visitorsOnMachine;
+    private Long parkID;
     
-    @ManyToOne
-    private Park park;
+    private int visitorsOnMachine;
 
     @Enumerated(EnumType.STRING)
     private TypeOfMachines machineType;
@@ -50,6 +48,7 @@ public class Machine implements Serializable {
     private int ageLimit;
 
     public Machine() {
+        //default
     }
 
     public int getVisitorsOnMachine() {
@@ -68,20 +67,20 @@ public class Machine implements Serializable {
         this.name = name;
     }
 
+    public Long getParkID() {
+        return parkID;
+    }
+
+    public void setParkID(Long parkID) {
+        this.parkID = parkID;
+    }
+
     public int getPrice() {
         return price;
     }
 
     public void setPrice(int price) {
         this.price = price;
-    }
-
-    public Park getPark() {
-        return park;
-    }
-
-    public void setPark(Park park) {
-        this.park = park;
     }
 
     public long getSizeOfMachine() {

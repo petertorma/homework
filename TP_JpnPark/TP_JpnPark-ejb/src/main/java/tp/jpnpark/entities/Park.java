@@ -1,4 +1,4 @@
-package tp.jpnpark.entities;
+    package tp.jpnpark.entities;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -11,7 +11,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
-import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 /**
@@ -19,7 +18,6 @@ import javax.validation.constraints.NotNull;
  * @author Torma Péter
  */
 @Entity
-@Table(name = "amusement_park")
 public class Park implements Serializable {
 
     @Id
@@ -46,9 +44,10 @@ public class Park implements Serializable {
                     + "fk"))
     List<Machine> machines = new ArrayList<>();
 
-    private int ticketPrice;
+    private int ticketPrice=0;
 
     public Park() {
+        //default
     }
 
     public int getTicketPrice() {

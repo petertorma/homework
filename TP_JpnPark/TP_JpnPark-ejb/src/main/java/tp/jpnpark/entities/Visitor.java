@@ -1,8 +1,6 @@
 package tp.jpnpark.entities;
 
 import java.io.Serializable;
-import java.time.LocalDate;
-import java.util.Calendar;
 import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -12,7 +10,6 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
@@ -23,19 +20,19 @@ import tp.jpnpark.enums.StateOfTheVisitor;
  * @author Torma Péter
  */
 @Entity
-/*@NamedQueries({
+@NamedQueries({
 @NamedQuery(name = "visitorsOnMachine",
-query = "SELECT vis FROM Visitor vis WHERE vis.machine.machineId = :machineId"),
+query = "SELECT v FROM Visitor v WHERE v.machine.id = :machineId"),
 @NamedQuery(name = "tiredVisitors",
-query = "SELECT COUNT(vis) FROM Visitor vis WHERE vis.amusementPark.parkId = :parkId AND v.state LIKE 'REST'"),
+query = "SELECT COUNT(v) FROM Visitor v WHERE v.park.id = :parkId AND v.state LIKE 'REST'"),
 @NamedQuery(name = "actionVisitors",
-query = "SELECT COUNT(vis) FROM Visitor vis WHERE vis.amusementPark.parkId = :parkId AND v.state LIKE 'ON_MACHINE'")
-})*/
+query = "SELECT COUNT(v) FROM Visitor v WHERE v.park.id = :parkId AND v.state LIKE 'ON_MACHINE'")
+})
 public class Visitor implements Serializable {
 
     @Id
     @GeneratedValue
-    private Long id;
+    private Long visitorId;
 
     @NotNull
     private int money;
@@ -119,11 +116,11 @@ public class Visitor implements Serializable {
     }
 
     public Long getId() {
-        return id;
+        return visitorId;
     }
 
     public void setId(Long id) {
-        this.id = id;
+        this.visitorId = id;
     }
 
 }

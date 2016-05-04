@@ -10,32 +10,32 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToOne;
 
 /**
  *
  * @author Torma Péter
  */
 @Entity
-//@NamedQuery(name = "logByVisitor",
-//        query = "SELECT gb FROM Guestbook gb WHERE gb.amusementPark.parkId = :parkId AND gb.visitor.visitorId = :visitorId")
+@NamedQuery(name = "logByVisitor",
+        query = "SELECT g FROM GuestBook g WHERE g.park.id = :parkId AND g.visitor.visitorId = :visitorId")
 public class GuestBook implements Serializable {
 
     @Id
     @GeneratedValue
     private Long id;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "park_fk")
     private Park park;
 
     @ManyToOne
     @JoinColumn(name = "visitor_fk")
-    private Visitor visitorId;
+    private Visitor visitor;
 
     private Map<LocalDate, String> logs = new HashMap<>();
 
     public GuestBook() {
+        //default
     }
 
     public Map<LocalDate, String> getLogs() {
@@ -55,11 +55,11 @@ public class GuestBook implements Serializable {
     }
 
     public Visitor getVisitorId() {
-        return visitorId;
+        return visitor;
     }
 
     public void setVisitorId(Visitor visitorId) {
-        this.visitorId = visitorId;
+        this.visitor = visitorId;
     }
 
     public Long getId() {

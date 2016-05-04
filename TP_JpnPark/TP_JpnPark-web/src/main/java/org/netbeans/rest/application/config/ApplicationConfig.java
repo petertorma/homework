@@ -35,7 +35,7 @@ public class ApplicationConfig extends Application {
         resources.add(com.mycompany.rest.ParkRESTService.class);
         resources.add(com.mycompany.rest.QueryRESTService.class);
         resources.add(com.mycompany.rest.VisitorRESTService.class);
-        resources.add(tp.jpnpark.exceptions.BookNotExistsMapper.class);
+        resources.add(tp.jpnpark.exceptions.InvalidValuesMapper.class);
     }
     
 }

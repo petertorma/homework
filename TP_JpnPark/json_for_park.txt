@@ -1,0 +1,203 @@
+address létrehozása: 
+
+POST: 
+
+http://localhost:8080/TP_JpnPark-web/webresources/address
+
+{
+"zipCode":"hg-12",
+"country":"Hungary",
+"city":"Budapest",
+"street":"random str.",
+"houseNumber":"2/b"
+}
+
+park létrehozása: ( az előzőleg létrehozott address hozzáadásával.)
+
+POST
+ROSSZ próbáélkozás:  exception dobódik
+
+http://localhost:8080/TP_JpnPark-web/webresources/park/create/3
+
+JÓ:
+
+http://localhost:8080/TP_JpnPark-web/webresources/park/create/1
+
+{
+"name":"new park",
+"money":40000,
+"area":40000
+}
+
+machine létrehozása: 
+
+POST
+
+http://localhost:8080/TP_JpnPark-web/webresources/machine
+
+
+{
+"name":"new machine",
+"price":3000,
+"sizeOfMachine":300,
+"ticketPrice":30,
+"capacity":30
+}
+
+machine hozzáadása a parkhoz. 
+
+PUT
+
+http://localhost:8080/TP_JpnPark-web/webresources/park/add/machine/3/2  ( 1. a machine id, 2. a park id )
+
+
+park lekérdezése, látjuk hogy hozzá lett adva a machine: ( a park money csökkent és az area is)
+
+GET
+
+http://localhost:8080/TP_JpnPark-web/webresources/park/get/2
+
+
+Visitor létrehozása : 
+
+POST
+
+http://localhost:8080/TP_JpnPark-web/webresources/visitors
+
+{
+"money":3000,
+"age":18
+}
+
+Visitor hozzáadása a parkhoz: 
+
+PUT  
+	
+http://localhost:8080/TP_JpnPark-web/webresources/park/enter/visitor/4/2  ( visitor id, park id )
+
+
+visitor lekérdezése: 
+
+GET
+
+http://localhost:8080/TP_JpnPark-web/webresources/visitors/get/4
+
+Visitor felültetése egy gépre: 
+
+PUT
+
+http://localhost:8080/TP_JpnPark-web/webresources/park/add/visitor/4/2/3 ( visitorId, parkId, machineId )
+
+
+visitor levétele a gépről: 
+
+PUT
+
+http://localhost:8080/TP_JpnPark-web/webresources/park/delete/visitor/4/2/3 ( visitorid, parkid, machineid)
+
+guestbook létrehozása: 
+
+POST
+
+http://localhost:8080/TP_JpnPark-web/webresources/guestbook/2/4 ( parkid, visitorid)
+
+írni guestbookba:
+
+POST
+
+http://localhost:8080/TP_JpnPark-web/webresources/park/log/4/2/51
+
+{
+"message":"ez egy log: szia :)"
+}
+
+LOG lekérdezése: 
+
+GET
+
+http://localhost:8080/TP_JpnPark-web/webresources/park/logs/2/51 ( park id, guestbook id)
+(nem mindig adja vissza json ben valamiért a rest)
+
+gép törlése:
+
+DELETE 
+
+http://localhost:8080/TP_JpnPark-web/webresources/park/delete/machine/3/2 ( machine id , parkid)
+
+visitorok lekérdezése akik nincsenek gépen de bent vannak a parkban: 
+
+GET
+
+http://localhost:8080/TP_JpnPark-web/webresources/query/tiredVisitors/2 ( parkid)
+
+guestbookok lekérdezése egy adott parkhoz és visitorhoz: 
+
+GET
+
+http://localhost:8080/TP_JpnPark-web/webresources/query/logByVisitor/2/4 ( parkid, visitorid)
+
+gép törlése a parkból: 
+
+DELETE
+
+http://localhost:8080/TP_JpnPark-web/webresources/park/delete/machine/3/2 ( machineid , parkid)
+
+park törlése: 
+
+DELETE
+
+ROSSZ kísérlet: exception dobódik: 
+http://localhost:8080/TP_JpnPark-web/webresources/park/delete/3
+
+JÓ:
+http://localhost:8080/TP_JpnPark-web/webresources/park/delete/2
+
+visitor lekérdezése: 
+
+GET
+
+http://localhost:8080/TP_JpnPark-web/webresources/visitors/get/4
+
+a státusza átállt REST-be miután a park megszűnt. 
+
+visitor update:
+
+PUT
+
+http://localhost:8080/TP_JpnPark-web/webresources/visitors/update/4
+
+{
+"money":400000,
+"age":30
+}
+
+visitor törlése: 
+
+DELETE
+
+http://localhost:8080/TP_JpnPark-web/webresources/visitors/delete/4
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

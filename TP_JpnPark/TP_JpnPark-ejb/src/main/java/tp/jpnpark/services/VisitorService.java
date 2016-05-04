@@ -5,6 +5,7 @@ import javax.inject.Inject;
 import tp.jpnpark.entities.GuestBook;
 import tp.jpnpark.entities.Visitor;
 import tp.jpnpark.enums.StateOfTheVisitor;
+import tp.jpnpark.exceptions.InvalidValues;
 import tp.jpnpark.facade.EntityFacade;
 
 /**
@@ -12,7 +13,7 @@ import tp.jpnpark.facade.EntityFacade;
  * @author Torma Péter
  */
 @Stateless
-public class VisitorService {
+public class VisitorService  {
 
     @Inject
     private EntityFacade entityManager;
@@ -49,19 +50,19 @@ public class VisitorService {
 
     public void delete(long visitorId) {
         checkVisitor(visitorId);
+        Visitor tempVisitor = entityManager.find(Visitor.class, visitorId);
         for (GuestBook gb : entityManager.findAll(GuestBook.class)) {
-            if (gb.getVisitorId().equals(visitorId)) {
-                gb.setVisitorId(null);
-                entityManager.update(gb);
-            }
+            gb.setVisitorId(null);
+            entityManager.update(gb);
+
         }
-        entityManager.delete(entityManager.find(Visitor.class, visitorId));
+        entityManager.delete(tempVisitor);
     }
 
     public boolean checkVisitor(long visitorId) {
         if (entityManager.find(Visitor.class, visitorId) != null) {
             return true;
         }
-        throw new RuntimeException("there is no visitor with this id");
+        throw new InvalidValues("there is no visitor with this id");
     }
 }

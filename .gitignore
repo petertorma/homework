@@ -10,3 +10,7 @@
 /homwwork_messageService/TP_JMS/TP_JMS-ear/target/
 /homwwork_messageService/TP_JMS/TP_JMS-ejb/target/
 /homwwork_messageService/TP_JMS/TP_JMS-web/target/
+/authenticationTest/authenticationTest-web/target/
+/authenticationTest/authenticationTest-ear/target/
+/jfsfauth/jfsfauth-web/target/
+/jfsfauth/jfsfauth-ear/target/

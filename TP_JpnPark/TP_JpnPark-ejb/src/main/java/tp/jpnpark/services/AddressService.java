@@ -1,14 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package tp.jpnpark.services;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import tp.jpnpark.entities.Address;
 import tp.jpnpark.entities.Park;
+import tp.jpnpark.exceptions.InvalidValues;
 import tp.jpnpark.facade.EntityFacade;
 
 /**
@@ -50,7 +46,7 @@ public class AddressService {
         Address address = entityManager.find(Address.class, addressId);
         for (Park park : entityManager.findAll(Park.class)) {
             if (park.getAdress().getId().equals(address.getId())) {
-                parkService.Delete(park.getId());
+                parkService.delete(park.getId());
             }
         }
         entityManager.delete(addressId);
@@ -58,7 +54,7 @@ public class AddressService {
 
     public void checkAddress(long addressId) {
         if (entityManager.find(Address.class, addressId) == null) {
-            throw new RuntimeException("there is nod address with this id");
+            throw new InvalidValues("there is nod address with this id");
         }
     }
 }
